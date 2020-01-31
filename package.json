@@ -1,0 +1,15 @@
+{
+  "name": "Hotel-Booking",
+  "version": "1.0.0",
+  "description": "![Screenshot of Homepage](https://i.imgur.com/nil421f.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
+}

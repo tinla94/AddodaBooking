@@ -1,0 +1,53 @@
+.button {
+    padding: .5rem 2.5rem;
+    border-radius: 3px;
+    box-shadow: .1rem 3px .4rem rgba($main-black-color, 0.5);
+    color: white;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: all .3s;
+
+    &-link {
+        text-decoration: none !important;
+        color: white !important;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+
+    &:active,
+    &:focus {
+        box-shadow: .1rem 1px .4rem rgba($main-black-color, 0.5);
+        border: none;
+    }
+
+    &-orange {
+        background: $main-color;
+        margin-top: 1rem;
+    }
+
+    &-orange:hover {
+        background: $main-light-color;
+    }
+
+    &-gray {
+        background: $dark-gray-color;
+        margin: 1rem 0;
+        padding: .5rem 1rem;
+    }
+
+    &-gray:hover {
+        background: $light-gray-color;
+        color: white;
+    }
+
+    &-dark-gray {
+        background: $dark-gray-color;
+    }
+
+    &-dark-gray:hover {
+        background: $main-black-color;
+        color: white;
+    }
+}

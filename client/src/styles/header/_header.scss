@@ -1,0 +1,54 @@
+.navbar {
+  padding: 20px;
+  background-color: $main-black-color;
+
+  .bwm-search {
+    height: 50px;
+    width: 300px !important;
+  }
+
+  .navbar-brand {
+    margin-right: 30px;
+    font-size: 27px;
+    letter-spacing: 1px;
+    color: $main-color !important;
+    font-weight: 500;
+    font-family: 'Berkshire Swash', cursive;
+  }
+
+  .nav-item {
+    font-size: 14px;
+  }
+
+  .btn-bwm-search {
+    border-color: $main-color;
+    color: $main-color;
+
+    &:hover, &:focus, &:active {
+      background-color: transparent !important;
+      border-color: $main-color !important;
+      color: $main-color !important;
+      box-shadow: none;
+    }
+  }
+
+  .nav-item {
+    color: $main-white-color;
+  }
+
+  .dropdown-menu {
+    .dropdown-item {
+      font-size: 14px;
+
+      &:active {
+        background-color: $main-color;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 766px) {
+    .dropdown-toggle {
+      margin: 6px 0 18px 0;
+    }
+  }
+}

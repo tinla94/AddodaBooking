@@ -1,0 +1,98 @@
+@import 'variables.scss';
+@import 'header/header.scss';
+@import 'form/form.scss';
+@import 'button/button';
+
+@import 'booking/booking.scss';
+@import 'rental/rental-listing.scss';
+@import 'rental/rental-detail.scss';
+@import 'rental/rental-manage.scss';
+@import 'editable/editable-component.scss';
+@import 'payment/payment';
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'PT Serif', serif !important;
+}
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.page-jumbotron {
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid lightgray;
+  box-shadow: 2px 2px 2px rgba($main-black-color, 0.5);
+
+  &__background {
+    width: 100%;
+    background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url("/img/background-image/background1.jpg");
+    background-size: cover;
+    background-position: center center;  
+    padding: 10rem 0;
+  }
+
+  &__title {
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+    font-family: 'Muli', sans-serif;
+    margin-bottom: 2rem;
+  }
+
+  &__subtitle1,
+  &__subtitle2 {
+    letter-spacing: 6px;
+    margin: 1.5rem 0;
+  }
+}
+
+.page-brand {
+  color: $main-color;
+  font-family: 'Berkshire Swash', cursive;
+  transition: all .2s;
+}
+
+.page-layout-one {
+  margin: 0 1rem;
+}
+
+.page-layout-two {
+  margin: 1rem 2rem;
+}
+
+.page-layout-auth {
+  margin: 3rem;
+}
+
+.apartment {
+  color: #a72da3;
+}
+
+.house {
+  color: #bf1818;
+}
+
+.condo {
+  color: $main-light-color;
+}
+
+@media only screen and (max-width: 768px)
+{
+  form {
+    margin-bottom: 15px;
+  }
+}
