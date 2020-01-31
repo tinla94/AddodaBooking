@@ -1,5 +1,6 @@
 module.exports = {
   MONGO_URI: process.env.MONGO_URI,
+  REDIS_URL: process.env.REDIS_URL,
   SECRET: process.env.SECRET,
   COOKIE_SECRET: process.env.COOKIE_SECRET,
   AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,

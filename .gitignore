@@ -2,4 +2,6 @@ node_modules
 
 package-lock.json
 
-/server/config/dev
+server/config/dev.js
+
+server/config/ci.js

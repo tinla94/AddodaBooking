@@ -11,30 +11,41 @@ const stripe = require('stripe')(keys.stripe_sk);
 
 
 // Look at payments pending
-exports.getPendingPayments = function(req, res) {
+exports.getPendingPayments = async (req, res) => {
   const user = res.locals.user; // get user info
 
-  // Find recipient 
-  Payment
-    .where({toUser: user})
+  try {  
+    // looking for payment
+    const foundPayment = await Payment
+    .where({ toUser: user })
     .populate({
       path: 'booking',
       populate: {path: 'rental'}
     })
-    .populate('fromUser')
-    .exec(function(err, foundPayments) {
-      if (err) {
-        return res.status(422).send({errors: normalizeErrors(err.errors)});
-      }
+    .populate('fromUser');
 
-      return res.json(foundPayments);
-    })
+    // check payment
+    if (!foundPayment) {
+      return res.status(400).send({
+        errors: [{
+          title: 'Invalid data',
+          detail: 'Payment is not found'
+        }]
+      });
+    } 
+
+    // return payment
+    return res.status(200).json(foundPayment);
+
+  } catch (err) {
+    return res.status(400).send({errors: normalizeErrors(err.errors)});
+  }
 }
 
 
 
 // Coonfirming payments before charging and booking
-exports.confirmPayment = function(req, res) {
+exports.confirmPayment = async (req, res) => {
   const payment = req.body;
   const user = res.locals.user;
 

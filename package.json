@@ -1,15 +1,20 @@
 {
-  "name": "Hotel-Booking",
+  "name": "hotel-booking-app",
   "version": "1.0.0",
   "description": "![Screenshot of Homepage](https://i.imgur.com/nil421f.png)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:client": "cd client && npm run start",
+    "start:server": "cd server && npm run server",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^5.1.0"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
   }
 }

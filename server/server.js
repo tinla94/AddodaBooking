@@ -44,12 +44,11 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api', imageUploadRoutes);
 
 // Production build
-if (process.env.NODE_ENV === 'production') {
-    const appPath = path.join(__dirname, '..', 'build');
-    app.use(express.static(appPath));
+if (['production', 'ci'].includes(process.env.NODE_ENV)) {
+    app.use(express.static('client/build'));
   
     app.get('*', function(req, res) {
-      res.sendFile(path.resolve(appPath, 'index.html'));
+      res.sendFile(path.resolve('client', 'build', 'index.html'));
     });
 }
 
