@@ -11,12 +11,12 @@ const stripe = require('stripe')(keys.stripe_sk);
 
 
 // Look at payments pending
-exports.getPendingPayments = async (req, res) => {
+exports.getPendingPayment = async (req, res) => {
   const user = res.locals.user; // get user info
 
   try {  
     // looking for payment
-    const foundPayment = await Payment
+    const pendingPayment = await Payment
     .where({ toUser: user })
     .populate({
       path: 'booking',
@@ -25,7 +25,7 @@ exports.getPendingPayments = async (req, res) => {
     .populate('fromUser');
 
     // check payment
-    if (!foundPayment) {
+    if (!pendingPayment) {
       return res.status(400).send({
         errors: [{
           title: 'Invalid data',
@@ -35,7 +35,7 @@ exports.getPendingPayments = async (req, res) => {
     } 
 
     // return payment
-    return res.status(200).json(foundPayment);
+    return res.status(200).json(pendingPayment);
 
   } catch (err) {
     return res.status(400).send({errors: normalizeErrors(err.errors)});
@@ -49,67 +49,86 @@ exports.confirmPayment = async (req, res) => {
   const payment = req.body;
   const user = res.locals.user;
 
-  Payment.findById(payment._id)
+  try {
+    const foundPayment = await Payment.findById(payment._id)
     .populate('toUser')
-    .populate('booking')
-    .exec(async function(err, foundPayment) {
+    .populate('booking');
 
-      if (err) {
-        return res.status(422).send({errors: normalizeErrors(err.errors)});
-      }
-      // Find valid payment 
-      if (foundPayment.status === 'pending' && user.id === foundPayment.toUser.id) {
-        // Confirming booking
-        const booking = foundPayment.booking;
+    if(!foundPayment) {
+      return res.status(400).send({
+        errors: [{
+          title: 'Invalid data',
+          detail: 'Payment is not found'
+        }]
+      })
+    }
 
-        const charge = await stripe.charges.create({
-          amount: booking.totalPrice * 100,
-          currency: 'usd',
-          customer: payment.fromStripeCustomerId
-        })
+    // Find valid payment 
+    if (foundPayment.status === 'pending' && user.id === foundPayment.toUser.id) {
+      // Confirming booking
+      const booking = foundPayment.booking;
 
-        if (charge) {
-          // Updating booking
-          Booking.update({_id: booking}, { status: 'active'}, function(){});
+      const charge = await stripe.charges.create({
+        amount: booking.totalPrice * 100,
+        currency: 'usd',
+        customer: payment.fromStripeCustomerId
+      })
 
-          foundPayment.charge = charge;
-          foundPayment.status = 'paid';
+      // if booking is charged
+      // update your booking
+      if (charge) {
+        await Booking.update({_id: booking}, { status: 'active'}, function(){});
 
-          foundPayment.save(function(err) {
+        foundPayment.charge = charge;
+        foundPayment.status = 'paid';
+
+        foundPayment.save(err =>  {
+          if (err) {
+            return res.status(422).send({errors: normalizeErrors(err.errors)});
+          }
+
+
+          await User.update(
+            { _id: foundPayment.toUser }, 
+            { $inc: {revenue: foundPayment.amount} }, (err, user) => {
             if (err) {
               return res.status(422).send({errors: normalizeErrors(err.errors)});
             }
 
-
-            User.update({_id: foundPayment.toUser}, { $inc: {revenue: foundPayment.amount}}, function(err, user){
-              if (err) {
-                return res.status(422).send({errors: normalizeErrors(err.errors)});
-              }
-
-              return res.json({status: 'paid'});
-            })
+            return res.json({ status: 'paid' });
           })
-        }
+        })
       }
-    });
+    }
+  } catch(err) {
+    return res.status(422).send({errors: normalizeErrors(err.errors)});
+  }
 }
 
 
 // Declining payments
-exports.declinePayment = function(req, res) {
+exports.declinePayment = async (req, res) => {
   const payment = req.body;
   const { booking } = payment;
-  // Cancel booking once payment is cancelled
-  Booking.deleteOne({id: booking._id}, (err, deletedBooking) => {
 
-    if (err) {
-      return res.status(422).send({errors: normalizeErrors(err.errors)});
+  try {
+    const foundBooking = await Booking.findOneAndDelete({id: booking._id}); 
+
+    if(!foundBooking) {
+      return res.status(400).send({
+        errors: [{
+              title: "Invalid Data",
+              detail: "Booking is not found"
+          }]
+      })
     }
 
-    Payment.update({_id: payment._id}, {status: 'declined'}, function() {});
-    Rental.update({_id: booking.rental}, {$pull: {bookings: booking._id}}, () => {});
+    // Update payment and booking
+    await Payment.update({ _id: payment._id }, {status: 'declined'}, function() {});
+    await Rental.update({ _id: booking.rental }, {$pull: {bookings: booking._id}}, () => {});
 
-    return res.json({status: 'deleted'});
-
-  })
+    return res.status(200).json({ status: 'deleted' });
+  } catch (err) {
+    return res.status(400).send({errors: normalizeErrors(err.errors)});
+  }
 }

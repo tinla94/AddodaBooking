@@ -19,7 +19,6 @@ exports.signin = async (req, res) => {
         });
     }
 
-    // login user
     try {
         const user = await User.findOne({ email });
 

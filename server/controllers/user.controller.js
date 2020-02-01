@@ -1,6 +1,8 @@
 const User = require("../models/user");
 const keys = require("../config/keys");
 const normalizeErrors = require("../helpers/mongoose");
+const upload = require('../services/image-upload');
+const singleUpload = upload.single('image');
 
 // Get user information
 exports.getUser = async (req, res) => {
@@ -36,5 +38,21 @@ exports.getUser = async (req, res) => {
     return res.status(422).send({ errors: normalizeErrors(err.errors) });
     }
 };
+
+// Update user information
+
+// Delete user
+
+// Upload user image
+exports.uploadUserImage = (req, res) => {
+  singleUpload(req, res, function(err) {
+      if (err) {
+          return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}]});
+      }
+
+      return res.status(200).json({ 'userImageUrl': req.file.location });
+  });
+}
+
 
 

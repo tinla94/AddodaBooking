@@ -1,12 +1,10 @@
-const express = require('express');
-const router = express.Router();
+const router = require('./router');
 const { normalizeErrors } = require('../helpers/mongoose');
+const { authMiddleware }= require('../controllers/auth.controller');
 
 // Import Models
 const Rental = require('../models/rental');
 const User = require('../models/user');
-
-const { authMiddleware }= require('../controllers/user');
 
 
 // @route   GET api/rentals/secret

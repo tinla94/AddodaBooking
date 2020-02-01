@@ -17,12 +17,12 @@ const app = express();
 const FakeDb = require('./fake-db');
 
 // import routes
-const rentalRoutes = require('./routes/rentals'),
-    userRoutes = require('./routes/users'),
-    bookingRoutes = require('./routes/bookings'),
-    paymentRoutes = require('./routes/payments'),
-    imageUploadRoutes = require('./routes/image-upload');
-    ;
+const authRoutes = require('./routes/auth.route'),
+    rentalRoutes = require('./routes/rental.route'),
+    userRoutes = require('./routes/user.route'),
+    bookingRoutes = require('./routes/booking.route'),
+    paymentRoutes = require('./routes/payment.route');
+
 
 
 // Middleware
