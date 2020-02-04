@@ -1,8 +1,8 @@
 const User = require("../models/user");
 const keys = require("../config/keys");
 const normalizeErrors = require("../helpers/mongoose");
-const upload = require('../services/image-upload');
-const singleUpload = upload.single('image');
+const { profileImageUpload } = require('../services/image-upload');
+
 
 // Get user information
 exports.getUser = async (req, res) => {
@@ -43,16 +43,33 @@ exports.getUser = async (req, res) => {
 
 // Delete user
 
-// Upload user image
-exports.uploadUserImage = (req, res) => {
-  singleUpload(req, res, function(err) {
+// Profile Image Upload
+exports.uploadProfileImage = (req, res) => {
+  profileImageUpload(req, res, (err) => {
+    // check error
       if (err) {
-          return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}]});
+          return res.status(400).send({errors: 
+            [{
+              title: 'Image Upload Error', 
+              detail: err.message}
+          ]});
       }
 
-      return res.status(200).json({ 'userImageUrl': req.file.location });
+    // if file not found
+    if(req.file === undefined) {
+      console.log(`Error: No File Selected`);
+      return res.status(400).send({
+        errors: [{
+          title: 'Image Upload Error',
+          detail: `No File Selected`
+        }]
+      });
+    }
+
+    // return image
+    return res.status(200).json({ 
+      'Image Key': req.file.key,
+      'Image Location': req.file.location
+     });
   });
 }
-
-
-

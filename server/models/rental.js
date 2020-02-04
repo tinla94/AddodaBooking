@@ -22,15 +22,24 @@ const rentalSchema = new Schema({
     required: true, 
     lowercase: true 
   },
-  image: { 
+  images: [{ 
     type: String, 
     required: true 
+  }],
+  bedrooms: {
+    type: Number,
+    default: 0,
+    min: [1, `Minimum room is 1`],
+    max: [100, `Maximum rooms are 100`]
   },
-  bedrooms: Number,
-  shared: Boolean,
+  shared: {
+    type: Boolean, 
+    default: false
+  },
   description: { 
     type: String, 
-    required: true 
+    required: true,
+    min: [20, 'Please write 20 - 100 words about the place']
   },
   dailyRate: Number,
   createdAt: { 

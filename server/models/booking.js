@@ -12,7 +12,14 @@ const bookingSchema = new Schema({
   },
   totalPrice: Number,
   days: Number,
-  guests: Number,
+  guests: {
+    type: Number,
+    default: 2
+  },
+  children: {
+    type: Number,
+    default: 0
+  },
   createdAt: { 
     type: Date, 
     default: Date.now 

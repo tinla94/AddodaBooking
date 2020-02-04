@@ -1,5 +1,5 @@
 // import db
-require('./mongoose/mongoose');
+require('./db/mongoose');
 // packages
 const express = require('express');
 const mongoose = require('mongoose');
