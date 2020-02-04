@@ -1,33 +1,41 @@
-const { normalizeErrors } = require('../helpers/mongoose-error');
-
-
-// importing models
 const User = require('../models/user')
 const Rental = require('../models/rental');
+const { validationResult } = require('express-validator/check');
+const { normalizeErrors } = require('../helpers/mongoose-error');
 
+// Create Rental
+exports.createRental = async (req, res) => {
+    const user = req.user;
+    const errors = validationResult(req);
 
-// craete rental
-const createRental = async (req, res) => {
-    const user = res.locals.user;
+    // check errors 
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
-        // create new rental
-        const rental = await new Rental(req.body);
-        rental.user = user;
+        const rental = await new Rental({ ...req.body, user: user._id });
 
-        // update user rentals
-        await User.update({ _id: user.id }, { $push: { rentals: rental } }, function () { });
+        // add rentals to User model
+        User.update({ _id: user.id }, { $push: { rentals: rental } }, function () { });
 
         // save rental
-        await rental.save();
+        await rental.save((err) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+        });
 
+        // return rental
+        res.status(201).json(rental);
     } catch (err) {
-        return res.status(400).send({ errors: normalizeErrors(err.errors) });
-    }
+        console.error(err.message);
+        return res.status(500).send('Oops! Server Error');
+    };
 }
 
-// edit rental
-const editRental = async (req, res) => {
+// Update Rental
+exports.updateRental = async (req, res) => {
     const rentalData = req.body;
     const user = res.locals.user;
 
@@ -36,43 +44,31 @@ const editRental = async (req, res) => {
 
         // check if rental is created
         if (!foundRental) {
-            return rs.status(400).send({
-                errors: [{
-                    title: 'Invalid Rental data',
-                    details: 'Retanl is not found'
-                }]
-            })
+            return res.status(400).send('Invalid Data! Rental is not found')
         }
 
         // check rental owner
         if (foundRental.user.id !== user.id) {
-            return res.status(400).send({
-                errors: [{
-                    title: 'Invalid User!',
-                    detail: 'You are not rental owner!'
-                }]
-            });
+            return res.status(400).send('You are not authorized to do this');
         }
 
         // update new data with current data
         foundRental.set(rentalData);
         foundRental.save(function (err) {
             if (err) {
-                return res.status(422).send({ errors: normalizeErrors(err.errors) });
+                return res.status(400).send(err);
             }
 
-            return res.status(200).send(foundRental);
+            return res.status(201).send(foundRental);
         });
-
     } catch (err) {
-        return res.status(400).send({ errors: normalizeErrors(err.errors) });
-    }
+        console.error(err.message);
+        return res.status(500).send('Oops! Server Error');
+    };
 }
 
-// delete rental
-const deleteRental = async (req, res) => {
-    const user = res.locals.user;
-
+// Delete rental
+exports.deleteRental = async (req, res) => {
     try {
         const foundRental = await Rental
             .findById(req.params.id)
@@ -84,14 +80,14 @@ const deleteRental = async (req, res) => {
             })
             .exec();
 
-        // check user owner
-        if (user.id !== foundRental.user.id) {
-            return res.status(422).send({ errors: [{ title: 'Invalid User!', detail: 'You are not rental owner!' }] });
+        // check if user own the rental post
+        if (req.user._id !== foundRental.user.id) {
+            return res.status(422).send('You are not authorized to do this');
         }
 
         // check if someone is booking this rental
         if (foundRental.bookings.length > 0) {
-            return res.status(422).send({ errors: [{ title: 'Active Bookings!', detail: 'Cannot delete rental with active bookings!' }] });
+            return res.status(422).send('Request Denied! This rental is currently booked by customers');
         }
 
         // remove rental 
@@ -100,77 +96,53 @@ const deleteRental = async (req, res) => {
                 return res.status(422).send({ errors: normalizeErrors(err.errors) });
             }
 
-            return res.json({ 'status': 'deleted' });
+            return res.status(200).json('Rental has been successfully removed');
         });
     } catch (err) {
-        return res.status(400).send({ errors: normalizeErrors(err.errors) });
-    }
-}
-
-// get all rentals
-const getAllRentals = async (req, res) => {
-    // Get all rentals 
-    // without selecing bookings
-    const rentals = await Rental.find({}).select('-booking');
-
-    // if no rentals found
-    if (rentals.length === 0) {
-        return res.status(400).send({
-            errors: [{
-                title: 'Invalid data',
-                details: 'There are no rentals to see'
-            }]
-        });
+        console.error(err.message);
+        return res.status(500).send('Oops! Server Error');
     };
-
-    // return rentals
-    return res.status(200).send(rentals);
 }
 
-// get single rental
-const getRental = async (req, res) => {
+// Get all rentals
+exports.getAllRentals = async (req, res) => {
     try {
-        const foundRental = await (await Rental.findById( req.params.id).populate('user', 'username -_id')).populated('bookings', 'startAt endAt -_id').exec();
+        const rentals = await Rental.find({}).select('-booking');
 
-        if (!foundRental) {
-            return rs.status(400).send({
-                errors: [{
-                    title: 'Invalid Rental data',
-                    details: 'Retanl is not found'
-                }]
-            })
-        }
-
-        // return rental
-        return res.status(200).send(foundRental);
-    } catch (err) {
-        return res.status(400).send({
-            errors: normalizeErrors(err.messages)
-        })
-    }
-}
-
-// get lists of user rentals
-const getUserRentals = async (req, res) => {
-    const user = res.locals.user;
-
-    try {
-        const foundRentals = await Rental.where({ user }).populate('bookings');
-
-        if (foundRentals.length === 0) {
+        // if no rentals 
+        // return error
+        if (rentals.length === 0) {
             return res.status(400).send({
                 errors: [{
                     title: 'Invalid data',
                     details: 'There are no rentals to see'
                 }]
             });
+        };
+
+        // return all rentals
+        return res.status(200).json(rentals);
+
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Oops! Server Error');
+    };
+}
+
+// Get a rental info
+exports.getRental = async (req, res) => {
+    try {
+        const foundRental = await Rental.findById(req.params.id).populate('user', 'username -_id').populated('bookings', 'startAt endAt -_id').exec();
+
+        if (!foundRental) {
+            return rs.status(401).send('Invalid data! Rental is not found')
         }
 
-        // return rentals
-        return res.status(200).send(foundRentals);
+        // return rental
+        return res.status(200).json(foundRental);
     } catch (err) {
-        return res.status(400).send({
-            errors: normalizeErrors(err.messages)
-        })
-    }
+        console.error(err.message);
+        return res.status(500).send('Oops! Server Error');
+    };
 }
+

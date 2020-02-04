@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const normalizeErrors = require("../helpers/mongoose");
-const User = require('../models/user');
+const normalizeErrors = require("../helpers/mongoose-error");
+const User = require('../models/user.model');
 const keys = require("../config/keys");
 
 // Logging in user

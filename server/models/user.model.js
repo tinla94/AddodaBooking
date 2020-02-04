@@ -1,8 +1,18 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+  firstName: {
+    type: String,
+    min: [4, 'Too short, min is 4 characters'],
+    max: [32, 'Too long, max is 32 characters']
+  },
+  lastName: {
+    type: String,
+    min: [4, 'Too short, min is 4 characters'],
+    max: [32, 'Too long, max is 32 characters']
+  },
   username: {
     type: String,
     min: [4, 'Too short, min is 4 characters'],
@@ -23,8 +33,16 @@ const userSchema = new Schema({
     max: [32, 'Too long, max is 32 characters'],
     required: 'Password is required'
   },
+  avartar: {
+    type: String,
+    trim: true
+  },
   stripeCustomerId: String,
   revenue: Number,
+  joined: {
+    type: Date,
+    default: Date.now
+  },
   rentals: [{
     type: Schema.Types.ObjectId, 
     ref: 'Rental'
@@ -34,9 +52,6 @@ const userSchema = new Schema({
     ref: 'Booking' 
   }]
 });
-
-
-
 
 // Comparing passwords
 // if you use arrow structure bcrpyt wont work

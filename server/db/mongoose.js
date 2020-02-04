@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const FakeData = require('../fake-db');
+const keys = require('../config/keys');
 
 mongoose.Promise = global.Promise;
 // connecting to mongoDB

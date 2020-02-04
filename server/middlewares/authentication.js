@@ -19,7 +19,6 @@ exports.authMiddleware = async (req, res, next) => {
 
         //     }
 
-
         // });
         try {
             const foundUser = User.findById(user.userId);

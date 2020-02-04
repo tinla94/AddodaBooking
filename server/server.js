@@ -37,6 +37,7 @@ app.use(passport.session());
 
 
 // Setting up routes
+app.use('/api/auth', authRoutes);
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/bookings', bookingRoutes);
