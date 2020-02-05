@@ -2,69 +2,54 @@ const Payment = require('../models/payment');
 const Booking = require('../models/booking');
 const Rental = require('../models/rental');
 const User = require('../models/user');
-
-const { normalizeErrors } = require('../helpers/mongoose');
-
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.stripe_sk);
 
 
-
-// Look at payments pending
+// Find pending payment
 exports.getPendingPayment = async (req, res) => {
-  const user = res.locals.user; // get user info
-
-  try {  
+  try {
     // looking for payment
     const pendingPayment = await Payment
-    .where({ toUser: user })
-    .populate({
-      path: 'booking',
-      populate: {path: 'rental'}
-    })
-    .populate('fromUser');
+      .where({ toUser: req.user })
+      .populate({
+        path: 'booking',
+        populate: { path: 'rental' }
+      })
+      .populate('fromUser');
 
     // check payment
     if (!pendingPayment) {
-      return res.status(400).send({
-        errors: [{
-          title: 'Invalid data',
-          detail: 'Payment is not found'
-        }]
-      });
-    } 
+      return res.status(400).json({ error: 'Payment is not found'});
+    }
 
     // return payment
     return res.status(200).json(pendingPayment);
 
   } catch (err) {
-    return res.status(400).send({errors: normalizeErrors(err.errors)});
-  }
+    console.error(err.message);
+    return res.status(500).send('Oops! Server Error');
+  };
 }
 
 
 
-// Coonfirming payments before charging and booking
+// Accpeting Payment
 exports.confirmPayment = async (req, res) => {
   const payment = req.body;
-  const user = res.locals.user;
+  const user = req.user;
 
   try {
     const foundPayment = await Payment.findById(payment._id)
-    .populate('toUser')
-    .populate('booking');
+      .populate('toUser')
+      .populate('booking');
 
-    if(!foundPayment) {
-      return res.status(400).send({
-        errors: [{
-          title: 'Invalid data',
-          detail: 'Payment is not found'
-        }]
-      })
+    if (!foundPayment) {
+      return res.status(400).json({ error: 'Payment is not found'});
     }
 
     // Find valid payment 
-    if (foundPayment.status === 'pending' && user.id === foundPayment.toUser.id) {
+    if (foundPayment.status === 'pending' && user._id === foundPayment.toUser.id) {
       // Confirming booking
       const booking = foundPayment.booking;
 
@@ -77,58 +62,55 @@ exports.confirmPayment = async (req, res) => {
       // if booking is charged
       // update your booking
       if (charge) {
-        await Booking.update({_id: booking}, { status: 'active'}, function(){});
+        await Booking.update({ _id: booking }, { status: 'active' }, function () { });
 
         foundPayment.charge = charge;
         foundPayment.status = 'paid';
 
-        foundPayment.save(err =>  {
+        foundPayment.save(err => {
           if (err) {
-            return res.status(422).send({errors: normalizeErrors(err.errors)});
+            return res.status(400).send(err);
           }
 
 
           await User.update(
-            { _id: foundPayment.toUser }, 
-            { $inc: {revenue: foundPayment.amount} }, (err, user) => {
-            if (err) {
-              return res.status(422).send({errors: normalizeErrors(err.errors)});
-            }
+            { _id: foundPayment.toUser },
+            { $inc: { revenue: foundPayment.amount } }, (err, user) => {
+              if (err) {
+                return res.status(400).send(err);
+              }
 
-            return res.json({ status: 'paid' });
-          })
+              return res.status(200).json({ msg: 'Payment has been accepted' });
+            })
         })
       }
     }
-  } catch(err) {
-    return res.status(422).send({errors: normalizeErrors(err.errors)});
-  }
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send('Oops! Server Error');
+  };
 }
 
 
-// Declining payments
+// Declining Payment
 exports.declinePayment = async (req, res) => {
   const payment = req.body;
   const { booking } = payment;
 
   try {
-    const foundBooking = await Booking.findOneAndDelete({id: booking._id}); 
+    const foundBooking = await Booking.findOneAndDelete({ id: booking._id });
 
-    if(!foundBooking) {
-      return res.status(400).send({
-        errors: [{
-              title: "Invalid Data",
-              detail: "Booking is not found"
-          }]
-      })
+    if (!foundBooking) {
+      return res.status(400).json({ error: "Booking is not found" });
     }
 
     // Update payment and booking
-    await Payment.update({ _id: payment._id }, {status: 'declined'}, function() {});
-    await Rental.update({ _id: booking.rental }, {$pull: {bookings: booking._id}}, () => {});
+    await Payment.update({ _id: payment._id }, { status: 'declined' }, function () {});
+    await Rental.update({ _id: booking.rental }, { $pull: { bookings: booking._id } }, () => { });
 
-    return res.status(200).json({ status: 'deleted' });
+    return res.status(200).json({ msg: 'Payment has been declined' });
   } catch (err) {
-    return res.status(400).send({errors: normalizeErrors(err.errors)});
-  }
+    console.error(err.message);
+    return res.status(500).send('Oops! Server Error');
+  };
 }

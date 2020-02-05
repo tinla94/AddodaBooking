@@ -1,5 +1,5 @@
-const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -52,15 +52,6 @@ const userSchema = new Schema({
     ref: 'Booking' 
   }]
 });
-
-// Comparing passwords
-// if you use arrow structure bcrpyt wont work
-userSchema.methods.hasSamePassword = function(requestedPassword) {
-  // compareSync is used to compare input password and password in db
-  return bcrypt.compareSync(requestedPassword, this.password);
-}
-
-
 
 // Save data 
 userSchema.pre('save', function(next) {

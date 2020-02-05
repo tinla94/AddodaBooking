@@ -16,7 +16,7 @@ const CUSTOMER_SHARE = 0.8;
 // Create bookings
 exports.createBooking = async (req, res) => {
   const { startAt, endAt, totalPrice, guests, days, rental, paymentToken } = req.body;
-  const user = res.locals.user;
+  const user = req.user;
 
   try {
     // Define new booking
@@ -28,13 +28,8 @@ exports.createBooking = async (req, res) => {
       .populate('user');
 
     // User cannot book their own post
-    if (foundRental.user.id === user.id) {
-      return res.status(422).send({
-        errors: [{
-          title: 'Invalid User!',
-          detail: 'Cannot create booking on your Rental!'
-        }]
-      });
+    if (foundRental.user.id === user._id) {
+      return res.status(404).json({ error: 'You cannot create booking on your Rental!' });
     }
 
     // validate booking and rental
@@ -52,52 +47,31 @@ exports.createBooking = async (req, res) => {
         booking.payment = payment;
         booking.save(async (err) => {
           if (err) {
-            return res.status(400).send({ errors: normalizeErrors(err.errors) });
+            return res.status(400).send(err);
           }
 
+          // save rental and
+          // udpate user model
           foundRental.save();
           await User.update({ _id: user.id }, { $push: { bookings: booking } }, function () { });
 
-          return res.status(200).json({ startAt: booking.startAt, endAt: booking.endAt });
+          // return booking
+          return res.status(200).json(booking);
         });
       } else {
         return res.status(400).send({
-          errors: [{
-            title: 'Payment Error',
-            detail: err
-          }]
+          errors: [{ err }]
         });
       }
     } else {
-
-      return res.status(422).send({ errors: [{ title: 'Invalid Booking!', detail: 'Choosen dates are already taken!' }] });
+      return res.status(400).json({ error: 'Selected dates are already taken!'});
     }
 
   } catch (err) {
-    return res.status(400).send({
-      errors: normalizeErrors(err.errors)
-    });
-  }
-}
-
-
-// Get User bookings
-exports.getUserBookings = async (req, res) => {
-  const user = res.locals.user;
-  const booking = await Booking.where({ user }).populate('rental');
-
-  if(!booking) {
-    return res.status(400).send({
-      errors: [{
-        title: 'Invalid Booking',
-        details: `Booking cannot be found`
-      }]
-    });
+    console.error(err.message);
+    return res.status(500).send('Oops! Server Error');
   };
-  // return booking
-  return res.json(foundBookings);
 }
-
 
 // validate booking with rental
 const isValidBooking = (proposedBooking, rental) => {
@@ -121,7 +95,7 @@ const isValidBooking = (proposedBooking, rental) => {
 };
 
 
-// Payment handling
+// Create payment for booking
 const createPayment = async (booking, toUser, token)=> {
   const { user } = booking;
   const tokenId = token.id || token;

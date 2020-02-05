@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getUser, updateUser, deleteUser, getUserRentals,uploadProfileImage } = require('../controllers/user.controller');
+const { getUser, updateUser, deleteUser, getUserRentals, getUserBookings, uploadProfileImage } = require('../controllers/user.controller');
 const requireLogin = require('../middlewares/requireLogin');
 
 
@@ -14,6 +14,11 @@ router.get('/user-profile', requireLogin, getUser);
 // @desc    Get user rentals list
 // @access  Private
 router.get('/rentals-manage', requireLogin, getUserRentals);
+
+// @route   GET api/users/bookings-manage
+// @desc    Get user bookings list
+// @access  Private
+router.get('/bookings-manage', requireLogin, getUserBookings);
 
 
 // @route   Patch api/users/user-profile/edit

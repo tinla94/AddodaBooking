@@ -6,16 +6,11 @@ const {
 } = require("../controllers/booking");
 
 
-// @route   POST api/bookings
+// @route   POST api/bookings/create
 // @desc    Add bookings to user account
 // @access  Private
-router.post('', authMiddleware, createBooking);
+router.post('/create', authMiddleware, createBooking);
 
-
-// @route   GET api/bookings/manage
-// @desc    Get all users' bookings
-// @access  Private
-router.get('/manage', authMiddleware, getUserBookings);
 
 
 module.exports = router;
