@@ -1,5 +1,5 @@
-const User = require('../models/user')
-const Rental = require('../models/rental');
+const User = require('../models/user.model')
+const Rental = require('../models/rental.model');
 const { validationResult } = require('express-validator/check');
 
 // Create Rental

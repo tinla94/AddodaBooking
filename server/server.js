@@ -7,14 +7,13 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const flash = require('connect-flash');
 const path = require('path');
+const passport = require('passport');
 const { createError } = require('http-errors');
 
 // keys
 const keys = require('./config/keys');
 // app
 const app = express();
-// import fakeDB
-const FakeDb = require('./fake-db');
 
 // import routes
 const authRoutes = require('./routes/auth.route'),
@@ -42,7 +41,6 @@ app.use('/api/rentals', rentalRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
-app.use('/api', imageUploadRoutes);
 
 // Production build
 if (['production', 'ci'].includes(process.env.NODE_ENV)) {

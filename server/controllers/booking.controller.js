@@ -1,13 +1,12 @@
-const { normalizeErrors } = require('../helpers/mongoose');
 const moment = require('moment');
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.STRIPE_SK);
 
 // Importing models
-const Booking = require('../models/booking');
-const Rental = require('../models/rental');
-const User = require('../models/user');
-const Payment = require('../models/payment');
+const Booking = require('../models/booking.model');
+const Rental = require('../models/rental.model');
+const User = require('../models/user.model');
+const Payment = require('../models/payment.model');
 
 
 const CUSTOMER_SHARE = 0.8;

@@ -1,9 +1,9 @@
-const Payment = require('../models/payment');
-const Booking = require('../models/booking');
-const Rental = require('../models/rental');
-const User = require('../models/user');
 const keys = require('../config/keys');
-const stripe = require('stripe')(keys.stripe_sk);
+const stripe = require('stripe')(keys.STRIPE_SK);
+const Payment = require('../models/payment.model');
+const Booking = require('../models/booking.model');
+const Rental = require('../models/rental.model');
+const User = require('../models/user.model');
 
 
 // Find pending payment
@@ -67,7 +67,7 @@ exports.confirmPayment = async (req, res) => {
         foundPayment.charge = charge;
         foundPayment.status = 'paid';
 
-        foundPayment.save(err => {
+        foundPayment.save( async (err) => {
           if (err) {
             return res.status(400).send(err);
           }

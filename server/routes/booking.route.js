@@ -1,15 +1,15 @@
-const router = require('./router');
-const { authMiddleware } = require('../controllers/auth.controller');
+const express = require('express');
+const router = express.Router();
+const requireLogin = require('../middlewares/requireLogin');
 const {
     createBooking,
-    getUserBookings
-} = require("../controllers/booking");
+} = require("../controllers/booking.controller");
 
 
 // @route   POST api/bookings/create
 // @desc    Add bookings to user account
 // @access  Private
-router.post('/create', authMiddleware, createBooking);
+router.post('/create', requireLogin, createBooking);
 
 
 

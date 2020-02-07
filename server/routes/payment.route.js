@@ -1,22 +1,23 @@
-const router = require('./router');
+const express = require('express');
+const router = express.Router();
+const requireLogin = require('../middlewares/requireLogin');
+const { getPendingPayment, confirmPayment, declinePayment } = require('../controllers/payment.controller');
 
-const { authMiddleware }= require('../controllers/user');
-const PaymentController = require('../controllers/payment');
+// @route   GET api/payments/pending
+// @desc    Get payment for booking
+// @access  Private
+router.get('/pending', requireLogin, getPendingPayment);
 
-router.get(
-    '', 
-    authMiddleware, 
-    PaymentController.getPendingPayments);
+// @route   POST api/payments/accept
+// @desc    Confirm payment for booking
+// @access  Private
+router.post('/accept', requireLogin, confirmPayment);
 
-router.post(
-    '/accept', 
-    authMiddleware, 
-    PaymentController.confirmPayment
-);
-router.post(
-    '/decline', 
-    authMiddleware, 
-    PaymentController.declinePayment
-);
+// @route   POST api/payments/decline
+// @desc    Decline payment for booking
+// @access  Private
+router.post('/decline', requireLogin, declinePayment);
+
+
 
 module.exports = router;

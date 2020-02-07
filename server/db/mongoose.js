@@ -6,11 +6,13 @@ mongoose.Promise = global.Promise;
 // connecting to mongoDB
 mongoose.connect(keys.MONGO_URI, {
     useNewUrlParser: true,
+    useFindAndModify: true,
+    useCreateIndex: true
 })
     .then(() => {
         // Fetching fake data
         if (process.env.NODE_ENV !== 'production') {
-            const fakeDb = new FakeDb();
+            const fakeDb = new FakeData();
             fakeDb.seedDb();
         }
     })
