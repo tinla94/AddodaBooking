@@ -16,7 +16,7 @@ exports.getUser = async (req, res) => {
     }
 
     // return user
-    return req.status(200).json(user);
+    return res.status(200).json(user);
   } catch (err) {
     console.error(err.message);
     return res.status(500).send('Oops! Server Error');
@@ -41,7 +41,7 @@ exports.updateUser = async (req, res) => {
       }
 
       // return user
-      return res.status(200).json({ msg: 'User information has been updated', user });
+      return res.status(200).json({ msg: 'Your information has been updated', user });
     });
   } catch (err) {
     console.error(err.message);
@@ -52,9 +52,13 @@ exports.updateUser = async (req, res) => {
 // Delete user
 exports.deleteUser = async (req, res) => {
   try {
-    await req.user.remove();
+    const user = await User.findByIdAndDelete(req.user.id);
+
+    // check user
+    if(!user) return res.status(400).json({ error: 'User is not found'});
+    
     // return message
-    return res.status(200).json({ msg: 'User account has been deleted' });
+    return res.status(200).json({ msg: 'Your account has been deleted' });
   } catch (err) {
     console.error(err.message);
     return res.status(500).send('Oops! Server Error');
@@ -90,10 +94,10 @@ exports.uploadProfileImage = (req, res) => {
 // Find user's bookings
 exports.getUserBookings = async (req, res) => {
   try {
-    const foundBookings = await Booking.find({ user: req.user._id});
+    const foundBookings = await Booking.where({ user: req.user.id});
 
     if(foundBookings.length === 0) {
-      return res.status(400).json({ error: 'There are no bookings at the moment'});
+      return res.status(400).json({ error: 'You have 0 bookings on your list'});
     }
 
     // return bookings
@@ -107,14 +111,16 @@ exports.getUserBookings = async (req, res) => {
 // Find user's rentals
 exports.getUserRentals = async (req, res) => {
   try {
-      const foundRentals = await Rental.find({ user: req.user._id });
+      const foundRentals = await Rental.where({ user: req.user.id });
+      console.log(foundRentals);
 
       if (foundRentals.length === 0) {
-          return res.status(400).json({ error: 'There are no rentals at the moment' });
+          console.log('0 rentals')
+          return res.status(400).json({ error: 'You have 0 rentals on your list' });
       }
 
       // return rentals
-      return res.status(200).json(foundRentals);
+      return res.status(200).json({ msg: 'Hello World' });
   } catch (err) {
       console.error(err.message);
       return res.status(500).send('Oops! Server Error');

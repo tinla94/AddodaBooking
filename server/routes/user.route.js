@@ -4,10 +4,10 @@ const { getUser, updateUser, deleteUser, getUserRentals, getUserBookings, upload
 const requireLogin = require('../middlewares/requireLogin');
 
 
-// @route   GET api/users/user-profile
-// @desc    Get user info
+// @route   GET api/users/profile/:id
+// @desc    Get user profile information
 // @access  Private
-router.get('/user-profile', requireLogin, getUser);
+router.get('/profile', requireLogin, getUser);
 
 
 // @route   GET api/users/rentals-manage
@@ -24,13 +24,13 @@ router.get('/bookings-manage', requireLogin, getUserBookings);
 // @route   Patch api/users/user-profile/edit
 // @desc    Edit user info
 // @access  Private
-router.patch('/user-profile/edit', requireLogin, updateUser);
+router.patch('/profile/edit', requireLogin, updateUser);
 
 
 // @route   Patch api/users/user-profile/delete
 // @desc    Delete user info
 // @access  Private
-router.delete('/user-profile/delete', requireLogin, deleteUser);
+router.delete('/profile/delete', requireLogin, deleteUser);
 
 
 // @route   POST api/users/image-upload

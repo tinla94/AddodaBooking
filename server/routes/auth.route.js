@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { check } = require('express-validator/check');
-const { signin, signup } = require('../controllers/auth.controller');
+const { check } = require('express-validator');
+const { signin, signup, signout } = require('../controllers/auth.controller');
+const requireLogin = require('../middlewares/requireLogin');
 
 
 // @route   POST api/auth/signin
@@ -24,12 +25,14 @@ router.post(
     [
         check('email', 'Valid email is required').isEmail(),
         check('password', 'Email is required').not().isEmpty(),
-        check('username', 'Username is required').not().isEmpty()
+        check('firstname', 'First name is required').not().isEmpty(),
+        check('lastname', 'Last name is required').not().isEmpty(),
     ],
     signup);
 
 // @route   POST api/auth/signout
 // @desc    Sign out user
 // @access  Private
+router.post('/signout', requireLogin, signout);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const requireLogin = require('../middlewares/requireLogin');
-const { check } = require('express-validator/check');
+const { check } = require('express-validator');
 const { getAllRentals, getRental, createRental, updateRental, deleteRental } = require('../controllers/rental.controller');
 
 

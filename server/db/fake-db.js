@@ -1,6 +1,6 @@
-const Rental = require('./models/rental.model');
-const User = require('./models/user.model');
-const Booking = require('./models/booking.model');
+const Rental = require('../models/rental.model');
+const User = require('../models/user.model');
+const Booking = require('../models/booking.model');
 
 const fakeDbData = require('./data.json');
 

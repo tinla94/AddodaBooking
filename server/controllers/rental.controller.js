@@ -1,6 +1,6 @@
 const User = require('../models/user.model')
 const Rental = require('../models/rental.model');
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator');
 
 // Create Rental
 exports.createRental = async (req, res) => {
@@ -13,10 +13,10 @@ exports.createRental = async (req, res) => {
     }
 
     try {
-        const rental = await new Rental({ ...req.body, user: user._id });
+        const rental = await new Rental({ ...req.body, user: user.id });
 
         // add rentals to User model
-        User.update({ _id: user._id }, { $push: { rentals: rental } }, function () { });
+        User.update({ _id: user.id }, { $push: { rentals: rental } }, function () { });
 
         // save rental
         await rental.save((err) => {
@@ -36,7 +36,7 @@ exports.createRental = async (req, res) => {
 // Update Rental
 exports.updateRental = async (req, res) => {
     try {
-        const foundRental = await Rental.findById(req.params.id).populate('user');
+        const foundRental = await Rental.findById(req.params.id);
 
         // check if rental is created
         if (!foundRental) {
@@ -44,7 +44,7 @@ exports.updateRental = async (req, res) => {
         }
 
         // check rental owner
-        if (foundRental.user.id !== req.user._id) {
+        if (foundRental.user.id !== req.user.id) {
             return res.status(400).send({ error: 'You are not authorized to do this' });
         }
 
@@ -121,7 +121,7 @@ exports.getAllRentals = async (req, res) => {
 // Get a rental info
 exports.getRental = async (req, res) => {
     try {
-        const foundRental = await Rental.findById(req.params.id).populate('user', 'username -_id').populated('bookings', 'startAt endAt -_id').exec();
+        const foundRental = await Rental.findById(req.params.id);
 
         if (!foundRental) {
             return res.status(401).send({ error: 'Rental is not found' });

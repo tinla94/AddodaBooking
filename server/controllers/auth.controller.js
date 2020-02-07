@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator');
 const normalizeErrors = require("../helpers/mongoose-error");
 const User = require('../models/user.model');
 const keys = require("../config/keys");
@@ -47,7 +47,7 @@ exports.signin = async (req, res) => {
 
 // Registering user
 exports.signup = async (req, res) => {
-    const { username, email, password, passwordConfirmation } = req.body;
+    const { firstname, lastname, email, password, passwordConfirmation } = req.body;
     const errors = validationResult(req);
 
     // check validation
@@ -70,7 +70,8 @@ exports.signup = async (req, res) => {
 
         // register user if email is not taken
         const user = new User({
-            username,
+            firstname, 
+            lastname,
             email,
             password
         }); 
@@ -88,3 +89,14 @@ exports.signup = async (req, res) => {
     }
 };
 
+
+// Sign out User
+exports.signout = async (req, res) => {
+    try {
+        console.log(req.user.firstname);
+        res.status(200).json({ msg: 'Signed out user account' })
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+}
