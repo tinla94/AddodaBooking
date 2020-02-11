@@ -1,6 +1,8 @@
 const moment = require('moment');
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.STRIPE_SK);
+const { normalizeErrors } = require('../helpers/mongoose-error');
+
 
 // Importing models
 const Booking = require('../models/booking.model');
@@ -28,8 +30,13 @@ exports.createBooking = async (req, res) => {
 
     // User cannot book their own post
     if (foundRental.user.id === user._id) {
-      return res.status(404).json({ error: 'You cannot create booking on your Rental!' });
-    }
+      return res.status(405).json({ 
+          errors: [{
+            title: 'Action Denied',
+            detail: 'You cannot create booking on your Rental!'
+          }]
+      });
+    };
 
     // validate booking and rental
     if (isValidBooking(booking, foundRental)) {
@@ -46,7 +53,9 @@ exports.createBooking = async (req, res) => {
         booking.payment = payment;
         booking.save(async (err) => {
           if (err) {
-            return res.status(400).send(err);
+            return res.status(400).send({
+              errors: normalizeErrors(err.errors)
+            });
           }
 
           // save rental and
@@ -63,12 +72,22 @@ exports.createBooking = async (req, res) => {
         });
       }
     } else {
-      return res.status(400).json({ error: 'Selected dates are already taken!'});
+      return res.status(400).json({ 
+        errors: [{
+          title: 'Something wrong...',
+          detail: 'Selected dates are already taken!'
+        }]
+      });
     }
 
   } catch (err) {
-    console.error(err.message);
-    return res.status(500).send('Oops! Server Error');
+    console.log(err.message)
+    return res.status(500).send({
+      errors: [{
+        title: 'Something wrong...',
+        detail: 'Oops! Internal Server Error'
+      }]
+    });
   };
 }
 
@@ -124,7 +143,6 @@ const createPayment = async (booking, toUser, token)=> {
     } catch (err) {
       return { err: err.message };
     }
-
   } else {
     return { err: 'Cannot process Payment!' }
   }

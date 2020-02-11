@@ -15,10 +15,6 @@ export const DELETE_USER = 'DELETE_USER';
 export const GET_REPOS = 'GET_REPOS';
 export const USER_PROFILE_ERROR = 'PROFILE_ERROR';
 
-// Alert action types
-export const SET_ALERT = 'SET_ALERT';
-export const REMOVE_ALERT = 'REMOVE_ALERT';
-
 // Rentals action types
 export const FETCH_RENTALS = 'FETCH_RENTALS';
 export const FETCH_RENTALS_SUCCESS = 'FETCH_RENTALS_SUCCESS';
