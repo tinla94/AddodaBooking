@@ -4,7 +4,7 @@ const { getUser, updateUser, deleteUser, getUserRentals, getUserBookings, upload
 const requireLogin = require('../middlewares/requireLogin');
 
 
-// @route   GET api/users/profile/:id
+// @route   GET api/users/profile
 // @desc    Get user profile information
 // @access  Private
 router.get('/profile', requireLogin, getUser);

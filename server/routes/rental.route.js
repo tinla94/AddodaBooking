@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const requireLogin = require('../middlewares/requireLogin');
 const { check } = require('express-validator');
-const { getAllRentals, getRental, createRental, updateRental, deleteRental } = require('../controllers/rental.controller');
+const { getAllRentals, getRental, createRental, updateRental, deleteRental, checkRentalOwner } = require('../controllers/rental.controller');
 
 
 // @route   GET api/rentals/all
@@ -43,31 +43,9 @@ router.patch('/edit/:id', requireLogin, updateRental);
 router.delete('/delete/:id', requireLogin, deleteRental);
 
 
-// @route   GET api/v1/rentals/:id/verify-user
+// @route   GET api/rentals/:id/verify-user
 // @desc    Verify user with rental post
 // @access  Private
-// router.get('/:id/verify-user', authMiddleware, function(req, res) {
-//     const user = res.locals.user;
-
-  
-//     // Seach rentals assocaite with user
-//     Rental
-//     .findById(req.params.id)
-//     .populate('user')
-//     .exec(function(err, foundRental) {
-//       if (err) {
-//         return res.status(422).send({errors: normalizeErrors(err.errors)});
-//       }
-
-//       if (foundRental.user.id !== user.id) {
-//         return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'You are not rental owner!'}]});
-//       }
-
-
-//       return res.json({status: 'verified'});
-//       });
-//   });
-
-
+router.get('/:id/verify-user', requireLogin, checkRentalOwner);
 
 module.exports = router;

@@ -3,7 +3,7 @@ import * as moment from 'moment';
 
 class AuthService {
 
-  tokenKey = 'auth_token';
+  tokenKey = 'auth-token';
 
   getToken() {
     return localStorage.getItem(this.tokenKey);

@@ -4,6 +4,7 @@
   "description": "![Screenshot of Homepage](https://i.imgur.com/nil421f.png)",
   "main": "index.js",
   "scripts": {
+    "build:client": "cd client && npm run build",
     "start:client": "cd client && npm run start",
     "start:server": "cd server && npm run server",
     "start": "concurrently \"npm run start:client\" \"npm run start:server\""

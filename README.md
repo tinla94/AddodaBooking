@@ -1,4 +1,4 @@
-# AdoddaBooking
+# OvernightBooking
 
 ![Screenshot of Homepage](https://i.imgur.com/nil421f.png)
 
@@ -12,46 +12,53 @@ I built a Full-stack Application, using MERN Stack (MongoDB, Express, React, Nod
 
 ## Back-End
 
-1. **Express** + **middleware** functions to provide abstract layer on top of NodeJS
+1. **Nodejs**: a platform built on Chrome’s JavaScript runtime for easily building fast and scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, and thus perfect for data-intensive real-time applications that run across distributed devices.
 
-2. **MongoDB**: Database set up that allows me to easily and expressively model user info my application.
+2. **Express.js**: a Node.js framework. You can create the server and server-side code for an application like most of the other web languages but using JavaScript.
 
-3. I use **mLab** as my digital database because they offer 500MB free for your storage.
+3. **MongoDB**: a cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schema. 
+
+4. **Redis**: an open-source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, and geospatial indexes with radius queries.
+
+5. **Socket.IO**: a JavaScript library for real-time web applications. It enables real-time, bi-directional communication between web clients and servers.
+
 
 ## Front-End
 
-4. **Bootstrap Material Design**: quick, easy set up, mobile responsive for **React** libraries.
+4. **Bootstrap**: a CSS Framework for developing responsive and mobile-first websites.
 
-5. **React**: a JavaScript library which brings a declarative class driven approach to defining UI components.
+5. **React**: a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used as a base in the development of single-page or mobile applications.
 
-6. **Redux**:  an open-source JavaScript library for managing application state
-
-7. **React-Reveal**: high performance animation library for React
-
-8. **Google Maps Javascript API**: an interactive map to your website. Customize it with your own content and imagery.
+6. **Redux**: an open-source JavaScript library for managing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
 
 
 ## Other Technologies
 
-9. **AWS s3**: Amazon storage service that offers industry-leading scalability, data availability, security, and performance.
+7. **AWS S3**: a service offered by Amazon Web Services that provides object storage through a web service interface.
 
-10. Passport, Nodemon, axios, body-parser etc. -
-
-11. Babel, ES6. Bluebird, because ES 6 is fun and also I believe in clean code (hence promises).
+8. **Google Map API**: a robust tool that can be used to create a custom map, a searchable map, check-in functions, display live data synching with location, plan routes, or create a mashup just to name a few
 
 
 # Getting Started
 
-To get you started you can first clone the repository to your local machine: 
+To get you started you can clone the repository to your local machine: 
 
 ```
-$ git clone https://github.com/tinla94/AddodaBooking
+$ git clone https://github.com/tinla94/OvernightBooking
 
+```
+
+### Or
+
+```
+Download the repository
 ```
 
 Also decide whether you will use `yarn` or `npm`.  My preference is `npm` and what the app was built on.  
 
-**Notice**: Run `npm install` on both **server** and **client**.
+**For npm**: Run `npm install` on both **server** and **client**.
+
+**For yarn**: Run `yarn add` on both **server** and **client**.
 
 ### Prerequisites
 
@@ -59,8 +66,9 @@ To run, first make sure you have Node installed. You can type `node -v` to find 
 
 ```
 $ node -v 
-v11.10.1
+v13.5.0
 ```
+
 If you do not have Node installed. You can download from their website: https://nodejs.org/en/download/ or you can install via Homebrew (need to install Homebrew first fo course). Here's a link to a guide: https://www.dyclassroom.com/howto-mac/how-to-install-nodejs-and-npm-on-mac-using-homebrew
 
 You will also need to have mongoDB for database management. I few options for you.
@@ -71,7 +79,7 @@ You will also need to have mongoDB for database management. I few options for yo
 mongod
 ```
 
-2. You can use **mLab** or **mongoAtlas** for virtual database.
+2. You can use **MongoAtlas** for virtual database.
 
 Please look at `package.json` file for all dependencies that you will need to install.  For example you will need *parcel-bundler* which can be installed via npm: 
 

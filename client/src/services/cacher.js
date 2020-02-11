@@ -1,4 +1,4 @@
-import camelCase from 'camel-case';
+import * as camelCase from 'camel-case';
 
 let instance = null;
 

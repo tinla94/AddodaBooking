@@ -2,6 +2,28 @@ const User = require('../models/user.model')
 const Rental = require('../models/rental.model');
 const { validationResult } = require('express-validator');
 
+
+// Check rental owner
+exports.checkRentalOwner = async (req, res) => {
+    try {
+        const foundrental = await Rental.findById(req.params.id).populate('user');
+
+        // check ids
+        if (foundRental.user.id !== req.user.id) {
+            return res.status(400).send({
+                errors: [{
+                    title: 'Unauthorized!', 
+                    detail: 'You are not rental owner!'}]});
+        }
+
+        // return result 
+        return res.status(200).json({status: 'verified'});
+    } 
+    catch (err) {
+        return res.status(400).send({errors: normalizeErrors(err.errors)});
+    }
+};
+
 // Create Rental
 exports.createRental = async (req, res) => {
     const user = req.user;
