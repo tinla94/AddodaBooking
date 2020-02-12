@@ -1,5 +1,6 @@
 @import 'variables.scss';
 @import 'header/header.scss';
+@import 'header/navbar';
 @import 'form/form.scss';
 @import 'button/button';
 
@@ -16,54 +17,18 @@ html, body {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: 'PT Serif', serif !important;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+li, a {
+  list-style-type: none;
 }
 
 .clickable {
   &:hover {
     cursor: pointer;
   }
-}
-
-.page-jumbotron {
-  color: #fff;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid lightgray;
-  box-shadow: 2px 2px 2px rgba($main-black-color, 0.5);
-
-  &__background {
-    width: 100%;
-    background-image: linear-gradient(
-      to right bottom,
-      rgba(0, 0, 0, 0.6),
-      rgba(0, 0, 0, 0.6)
-    ),
-    url("/img/background-image/background1.jpg");
-    background-size: cover;
-    background-position: center center;  
-    padding: 10rem 0;
-  }
-
-  &__title {
-    font-size: 3.5rem;
-    letter-spacing: 3px;
-    font-family: 'Muli', sans-serif;
-    margin-bottom: 2rem;
-  }
-
-  &__subtitle1,
-  &__subtitle2 {
-    letter-spacing: 6px;
-    margin: 1.5rem 0;
-  }
-}
-
-.page-brand {
-  color: $main-color;
-  font-family: 'Berkshire Swash', cursive;
-  transition: all .2s;
 }
 
 .page-layout-one {

@@ -4,7 +4,7 @@ const { validationResult } = require('express-validator');
 const normalizeErrors = require("../helpers/mongoose-error");
 const User = require('../models/user.model');
 const keys = require("../config/keys");
-const { normalizeErrors } = require('../helpers/mongoose-error');
+
 
 
 // Logging in user

@@ -1,7 +1,8 @@
 const moment = require('moment');
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.STRIPE_SK);
-const { normalizeErrors } = require('../helpers/mongoose-error');
+const normalizeErrors = require('../helpers/mongoose-error');
+
 
 
 // Importing models

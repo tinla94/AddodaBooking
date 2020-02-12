@@ -1,4 +1,6 @@
 import axios from 'axios';
+import axiosService from '../services/axios-service';
+
 import {
     RELOAD_MAP,
     RELOAD_MAP_FINISH,
@@ -11,6 +13,10 @@ import {
     UPDATE_RENTAL_SUCCESS,
     UPDATE_RENTAL_FAIL
 } from './types';
+
+
+const axiosInstance = axiosService.getInstance();
+
 
 // Reloading map for rental
 export const reloadMap = () => {
@@ -84,8 +90,8 @@ export const createRental = (rentalData) => {
 }
 
 // Update rental
-export const updateRental = (rentalId, rentalData) => {
-    return axiosInstance.patch(`/rentals/edit/${rentalId}`, rentalData)
+export const updateRental = (rentalId, rentalData) => async dispatch => {
+    axiosInstance.patch(`/rentals/edit/${rentalId}`, rentalData)
     .then(res => res.data)
     .then(updatedRental => {
         dispatch({

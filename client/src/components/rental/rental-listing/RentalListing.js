@@ -1,26 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { RentalList } from './RentalList';
 import { connect } from 'react-redux';
-
-import * as actions from 'actions';
-
+import { getAllRentals } from '../../../actions/rentals.action';
 
 class RentalListing extends React.Component {
 
   componentWillMount() {
-    this.props.dispatch(actions.fetchRentals());
+    this.props.dispatch(getAllRentals());
   }
 
   render() {
     return (
       <section id="rentalListing">
-        <div className="page-jumbotron">
-          <div className="page-jumbotron__background">
-            <h1 className="page-jumbotron__title">Welcome to <span className="page-brand">AdoddaBooking</span></h1>
-            <h4 className="page-jumbotron__subtitle1">Your <span>Home</span> All Around the <span>World</span></h4>
-
-            <p className="page-jumbotron__subtitle2">BOOK YOUR PLACE TODAY</p>
+        <div className="rentalListing-jumbotron">
+          <div className="rentalListing-jumbotron__background">
+            <div className='rentalListing-jumbotron__intro'>
+              <h2 className="rentalListing-jumbotron__intro-title">Need a room <span className="rentalListing-jumbotron__intro-title-bold">overnight</span>? </h2>
+              <h4 className="rentalListing-jumbotron__subtitle1">Join us and book your favourite place</h4>
+              <Link className='button button-orange' to="/register" style={{ textDecoration: 'none' }}>
+                Click here
+              </Link>
             </div>
+          </div>
         </div>
         {/* Rental List */}
         <RentalList rentals={this.props.rentals} />

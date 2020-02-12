@@ -2,7 +2,7 @@ const proxy = require('http-proxy-middleware');
 
 
 module.exports = app => {
-    app.use(proxy('/api/v1/**', 
+    app.use(proxy('/api/**', 
         { target: 'http://localhost:3001' }
     ));
 }

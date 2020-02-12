@@ -1,23 +1,13 @@
 .navbar {
-  padding: 20px;
-  background-color: $main-black-color;
+  padding-top: 5rem;
 
-  .bwm-search {
+  &--search {
     height: 50px;
-    width: 300px !important;
+    width: 100px;
   }
 
   .navbar-brand {
     margin-right: 30px;
-    font-size: 27px;
-    letter-spacing: 1px;
-    color: $main-color !important;
-    font-weight: 500;
-    font-family: 'Berkshire Swash', cursive;
-  }
-
-  .nav-item {
-    font-size: 14px;
   }
 
   .btn-bwm-search {

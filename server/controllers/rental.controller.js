@@ -1,7 +1,7 @@
 const User = require('../models/user.model')
 const Rental = require('../models/rental.model');
 const { validationResult } = require('express-validator');
-const { normalizeErrors } = require('../helpers/mongoose-error');
+const normalizeErrors = require('../helpers/mongoose-error');
 
 // Check rental owner
 exports.checkRentalOwner = async (req, res) => {
