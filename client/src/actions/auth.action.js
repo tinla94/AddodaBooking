@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-    LOGIN_FAIL,
+    LOGIN_FAILURE,
     LOGIN_SUCCESS,
     LOGOUT,
     USER_LOADED,
@@ -31,10 +31,10 @@ export const login = (userData) => {
                 });
             })
             .catch(({ response }) => {
-                dispatch(loginFailure({
-                    type: LOGIN_FAIL,
+                dispatch({
+                    type: LOGIN_FAILURE,
                     errors: response.data.errors
-                }));
+                });
             })
     }
 }

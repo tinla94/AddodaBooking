@@ -56,12 +56,15 @@
   }
 
   .bwm-card {
-    margin-bottom: 20px;
-    transition: all 0.3s;
-    box-shadow: 2px 0.2rem 0.4rem rgba($main-black-color, 0.5);
+    display: flex;
+    flex-direction: column;
+    min-height: 95%;
+    margin-bottom: 2em;
+    box-shadow: 2px 0.2rem 0.3rem rgba($main-black-color, 0.5);
+    transition: all .3s ease-in;
 
     &:hover {
-      transform: scale(1.07);
+      top: -3px;
     }
 
     &:active,
@@ -89,17 +92,35 @@
       }
 
       .card-title {
-        font-size: 19px;
-        margin: 3px 0;
+        font-size: 18px;
+        margin: 5px 0;
         color: $dark-gray-color;
       }
 
       .card-text {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 300;
         color: #7e7e7e;
         margin-bottom: 0;
       }
     }
+  }
+
+  .rentalListing-search {
+    width: 100%;
+    padding: 1rem 2rem;
+
+      h6 {
+        font-size: 14px;
+        font-style: italic;
+        color: $light-gray-color;
+      }
+
+      &__input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
   }
 }

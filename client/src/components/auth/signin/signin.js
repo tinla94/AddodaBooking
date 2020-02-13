@@ -1,8 +1,8 @@
 import React from 'react';
-import LoginForm from './LoginForm';
+import LoginForm from './signin-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import * as actions from 'actions';
+import { login } from '../../../actions/auth.action';
 
 class Login extends React.Component {
 
@@ -13,7 +13,7 @@ class Login extends React.Component {
   }
 
   loginUser(userData) {
-    this.props.dispatch(actions.login(userData));
+    this.props.dispatch(login(userData));
   }
 
   render() {

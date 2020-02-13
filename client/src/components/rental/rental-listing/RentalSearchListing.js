@@ -3,17 +3,12 @@ import { RentalList } from './RentalList';
 import { connect } from 'react-redux';
 
 import { toUpperCase } from 'helpers';
-import * as actions from 'actions';
+import { getAllRentals } from '../../../actions/rentals.action';
 
 
 class RentalSearchListing extends React.Component {
-
-  constructor() {
-    super();
-
-    this.state = {
-      searchedCity: ''
-    }
+  state = {
+    searchedCity: ''
   }
 
   componentWillMount() {
@@ -31,9 +26,9 @@ class RentalSearchListing extends React.Component {
 
   searchRentalsByCity() {
     const searchedCity = this.props.match.params.city;
-    this.setState({searchedCity});
+    this.setState({ searchedCity });
 
-    this.props.dispatch(actions.fetchRentals(searchedCity));
+    this.props.dispatch(getAllRentals(searchedCity));
   }
 
   renderTitle() {
@@ -45,7 +40,7 @@ class RentalSearchListing extends React.Component {
       title = errors[0].detail;
     }
 
-    if(data.length > 0) {
+    if (data.length > 0) {
       title = `Your Home in City of ${toUpperCase(searchedCity)}`;
     }
 

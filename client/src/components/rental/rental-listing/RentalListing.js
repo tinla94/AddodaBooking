@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { RentalList } from './RentalList';
+import RentalSearchInput from '../RentalSearchInput';
 import { connect } from 'react-redux';
 import { getAllRentals } from '../../../actions/rentals.action';
 
@@ -23,6 +24,11 @@ class RentalListing extends React.Component {
               </Link>
             </div>
           </div>
+        </div>
+        <div className="rentalListing-search">
+          <h6>Start searching for your city...</h6>
+          <RentalSearchInput />
+          <hr />
         </div>
         {/* Rental List */}
         <RentalList rentals={this.props.rentals} />

@@ -5,7 +5,6 @@ class RentalSearchInput extends React.Component {
 
   constructor() {
     super();
-
     this.searchInput = React.createRef();
   }
 
@@ -25,7 +24,7 @@ class RentalSearchInput extends React.Component {
 
   render() {
     return (
-      <div className='form-inline my-2 my-lg-0'>
+      <div className='rentalListing-search__input'>
         <input onKeyPress={(event) => { this.handleKeyPress(event)}}
                ref={this.searchInput}
                className='form-control mr-sm-2 bwm-search'
@@ -33,7 +32,7 @@ class RentalSearchInput extends React.Component {
                placeholder='Try "New York"'
                aria-label='Search'></input>
         <button onClick={() => {this.handleSearch()}}
-                className='btn btn-outline-success my-2 my-sm-0 btn-bwm-search'
+                className='button button-gray'
                 type='submit'>Search</button>
       </div>
     )
