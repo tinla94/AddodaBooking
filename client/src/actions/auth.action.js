@@ -2,10 +2,7 @@ import axios from 'axios';
 import {
     LOGIN_FAILURE,
     LOGIN_SUCCESS,
-    LOGOUT,
-    USER_LOADED,
-    AUTH_ERROR,
-    CLEAR_PROFILE
+    LOGOUT
 } from './types';
 import authService from '../services/auth-service';
 

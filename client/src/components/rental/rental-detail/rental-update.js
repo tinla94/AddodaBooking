@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import RentalMap from './RentalMap';
+import RentalMap from './rental-map';
 import Booking from 'components/booking/Booking';
 
 import { UserGuard } from '../../shared/auth/UserGuard';
-import { RentalAssets } from './RentalAssets';
+import { RentalAssets } from './rental-asset';
 import { toUpperCase } from 'helpers';
 
 import { EditableInput } from '../../shared/editable/EditableInput';

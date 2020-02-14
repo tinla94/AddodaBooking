@@ -1,5 +1,5 @@
 import React from 'react';
-import { RentalCard } from './RentalCard';
+import { RentalCard } from './rental-card';
 
 export class RentalList extends React.Component {
 

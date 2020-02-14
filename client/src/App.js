@@ -6,10 +6,10 @@ import { StripeProvider } from 'react-stripe-elements';
 
 import { ToastContainer } from 'react-toastify';
 import Header from 'components/header/Header';
-import RentalListing from 'components/rental/rental-listing/RentalListing';
-import RentalSearchListing from 'components/rental/rental-listing/RentalSearchListing';
-import RentalDetail from 'components/rental/rental-detail/RentalDetail';
-import RentalUpdate from 'components/rental/rental-detail/RentalUpdate';
+import RentalListing from 'components/rental/rental-listing/rental-listing';
+import RentalSearchListing from 'components/rental/rental-listing/rental-search-listing';
+import RentalDetail from 'components/rental/rental-detail/rental-detail';
+import RentalUpdate from 'components/rental/rental-detail/rental-update';
 import { RentalCreate } from 'components/rental/rental-create/RentalCreate';
 import Login from 'components/auth/signin/signin';
 import { Register } from 'components/auth/signup/signup';

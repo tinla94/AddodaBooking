@@ -1,5 +1,5 @@
 import React from 'react';
-import { RentalList } from './RentalList';
+import { RentalList } from './rental-list';
 import { connect } from 'react-redux';
 
 import { toUpperCase } from 'helpers';

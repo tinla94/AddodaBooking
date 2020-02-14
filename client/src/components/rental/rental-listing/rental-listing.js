@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RentalList } from './RentalList';
+import { RentalList } from './rental-list';
 import RentalSearchInput from '../RentalSearchInput';
 import { connect } from 'react-redux';
 import { getAllRentals } from '../../../actions/rentals.action';

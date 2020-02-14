@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { RentalDetailInfo } from './RentalDetailInfo';
-import RentalMap from './RentalMap';
+import { RentalDetailInfo } from './rental-detail-info';
 import Booking from 'components/booking/Booking';
+import DisqusThread from '../../../services/disqus-thread';
 
-import * as actions from 'actions';
+import { getRentalById } from '../../../actions/rentals.action';
+import * as actions from '../../../actions';
 import { Fade } from 'react-reveal';
 
 class RentalDetail extends React.Component {
@@ -13,7 +14,7 @@ class RentalDetail extends React.Component {
     // Dispatch action
     const rentalId = this.props.match.params.id;
 
-    this.props.dispatch(actions.fetchRentalById(rentalId));
+    this.props.dispatch(getRentalById(rentalId));
   }
   render() {
     const { rental } = this.props;
@@ -28,11 +29,11 @@ class RentalDetail extends React.Component {
                   <img src={rental.image} alt=''></img>
                 </Fade>
               </div>
-              <div className='col-md-6'>
+              {/* <div className='col-md-6'>
                 <Fade right duration={1100} delay={200}>
                   <RentalMap location={`${rental.city}, ${rental.street}`} />
                 </Fade>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -48,6 +49,8 @@ class RentalDetail extends React.Component {
               </div>
             </div>
           </div>
+          <hr />
+          <DisqusThread />
         </section>
       )
     } else {
