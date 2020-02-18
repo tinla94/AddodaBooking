@@ -27,6 +27,7 @@ nav {
     padding: 0;
 
     li {
+      span, 
       a {
         font-size: 13px;;
         padding: 10px 15px;
@@ -63,6 +64,11 @@ nav {
       a:after {
         bottom: 0;
         transform-origin: right;
+      }
+
+      a:hover,
+      span:hover {
+        color: $dark-gray-color;
       }
 
       a:hover::before,

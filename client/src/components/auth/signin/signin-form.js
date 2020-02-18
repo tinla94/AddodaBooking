@@ -27,7 +27,6 @@ const LoginForm = props => {
       <button className='button button-orange' type="submit" disabled={!valid || pristine || submitting}>
         Submit
         </button>
-      <FormError errors={errors} />
     </form>
   )
 }

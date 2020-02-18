@@ -1,6 +1,6 @@
 import React from 'react';
 import { RentalAssets } from './rental-asset';
-import { toUpperCase, rentalType } from 'helpers';
+import { rentalType } from 'helpers';
 
 
 export function RentalDetailInfo(props) {

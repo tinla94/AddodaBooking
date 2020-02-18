@@ -5,7 +5,6 @@ import Booking from 'components/booking/Booking';
 import DisqusThread from '../../../services/disqus-thread';
 
 import { getRentalById } from '../../../actions/rentals.action';
-import * as actions from '../../../actions';
 import { Fade } from 'react-reveal';
 
 class RentalDetail extends React.Component {

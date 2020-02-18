@@ -10,6 +10,7 @@
 @import 'rental/rental-manage.scss';
 @import 'editable/editable-component.scss';
 @import 'payment/payment';
+@import 'profile/profile';
 
 
 html, body {
@@ -23,6 +24,7 @@ html, body {
 
 li, a {
   list-style-type: none;
+  text-decoration: none;
 }
 
 .clickable {

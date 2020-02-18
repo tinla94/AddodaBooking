@@ -5,7 +5,7 @@ export function FormError(props) {
 
   return (
     errors.length > 0 &&
-      <div className='alert alert-danger bwm-res-errors'>
+      <div className='text-danger'>
         {errors.map((error, index) => <p key={index}> {error.detail} </p>)}
       </div>
   )

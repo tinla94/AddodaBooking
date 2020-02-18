@@ -18,6 +18,7 @@ class AxiosService {
     this.axiosInstance.interceptors.request.use(
       (config) => {
         const token = authService.getToken();
+        console.log(token);
 
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;

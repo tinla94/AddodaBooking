@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Dropdown } from 'react-bootstrap';
-import $ from 'jquery';
-import RentalSearchInput from 'components/rental/RentalSearchInput';
+
 
 class Header extends React.Component {
 
@@ -14,13 +12,23 @@ class Header extends React.Component {
 
   renderAuthButtons(isAuth) {
     if (isAuth) {
-      return <span className='nav-item nav-link clickable' onClick={this.handleLogout}>Sign Out</span>
+      return <li>
+        <span className='nav-item nav-link clickable' onClick={this.handleLogout}>Sign Out
+        </span>
+      </li>
     }
 
     return (
       <React.Fragment>
-        <li><Link className='nav-item nav-link' to='/login'>Sign In<span className='sr-only'>(current)</span></Link></li>
-        <li><Link className='nav-item nav-link' to='/register'>Register</Link></li>
+        <li>
+          <Link className='nav-item nav-link' to='/login'>Sign In
+          <span className='sr-only'>(current)</span>
+          </Link>
+        </li>
+        <li>
+          <Link className='nav-item nav-link' to='/register'>Register
+          </Link>
+        </li>
       </React.Fragment>
     )
   }
@@ -68,7 +76,11 @@ class Header extends React.Component {
             <li><Link className='nav-item nav-link' to='/'>Home</Link></li>
             <li><Link className='nav-item nav-link' to='/'>Contact Us</Link></li>
             {isAuth &&
-              <li>Hello, <span style={{ color: '#db5b06' }}>{username}</span></li>
+              <li>
+                <Link className='nav-item nav-link' to='/user/profile'>
+                  Profile
+                </Link>
+              </li>
             }
             {this.renderAuthButtons(isAuth)}
           </ul>

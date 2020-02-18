@@ -13,7 +13,7 @@ router.get('/profile', requireLogin, getUser);
 // @route   GET api/users/rentals-manage
 // @desc    Get user rentals list
 // @access  Private
-router.get('/rentals-manage', requireLogin, getUserRentals);
+router.get('/:id/rentals-manage', requireLogin, getUserRentals);
 
 // @route   GET api/users/bookings-manage
 // @desc    Get user bookings list

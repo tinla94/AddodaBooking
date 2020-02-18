@@ -1,9 +1,6 @@
 import axios from 'axios';
 import axiosService from '../services/axios-service';
-import {
-    GET_USER,
-    GET_USER_ERROR
-} from './types';
+
 
 // define axios 
 const axiosInstance = axiosService.getInstance();
@@ -12,9 +9,9 @@ const axiosInstance = axiosService.getInstance();
 // Get User Info
 export const getUser = () => {
     return axiosInstance.get('/users/profile').then(
-        res => res.data, 
+        res => res.data ,
         err => Promise.reject(err.response.data.errors)
-    )
+    );
 }
 
 // Edit user info

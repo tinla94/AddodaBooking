@@ -2,7 +2,7 @@ const User = require("../models/user.model");
 const Rental = require("../models/rental.model");
 const Booking = require('../models/booking.model');
 const keys = require("../config/keys");
-const { profileImageUpload } = require('../services/image-upload');
+const { profileImageUpload } = require('../services/aws/image-upload');
 const normalizeErrors = require('../helpers/mongoose-error');
 
 

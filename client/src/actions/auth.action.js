@@ -9,7 +9,7 @@ import authService from '../services/auth-service';
 
 // Register user
 export const register = (userData) => {
-    return axios.post('/auth/signup', userData).then(
+    return axios.post('/api/auth/signup', userData).then(
         res => res.data,
         err => Promise.reject(err.response.data.errors)
     )
@@ -19,10 +19,10 @@ export const register = (userData) => {
 // Log in user
 export const login = (userData) => {
     return async dispatch => {
-        return await axios.post('/auth/signin', userData)
+        return await axios.post('/api/auth/signin', userData)
             .then(res => res.data)
             .then(token => {
-                authService.saveToken(token);
+                authService.saveToken(token.token);
                 dispatch({
                     type: LOGIN_SUCCESS
                 });

@@ -2,11 +2,11 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
-export const AUTH_ERROR = AUTH_ERROR;
 
 // User action types
-export const GET_USER = 'GET_USER';
-export const GET_USER_ERROR = 'GET_USER_ERROR';
+export const FETCH_USER_BY_ID_INIT = 'FETCH_USER_BY_ID_INIT';
+export const FETCH_USER_BY_ID_SUCCESSS = 'FETCH_USER_BY_ID_SUCCESSS';
+export const FETCH_USER_BY_ID_ERROR = 'FETCH_USER_BY_ID_ERROR';
 export const CLEAR_USER = 'CLEAR_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
@@ -14,9 +14,8 @@ export const GET_REPOS = 'GET_REPOS';
 export const USER_PROFILE_ERROR = 'PROFILE_ERROR';
 
 // Rentals action types
-export const FETCH_RENTALS = 'FETCH_RENTALS';
-export const FETCH_RENTALS_SUCCESS = 'FETCH_RENTALS_SUCCESS';
 export const FETCH_RENTALS_INIT = 'FETCH_RENTALS_INIT';
+export const FETCH_RENTALS_SUCCESS = 'FETCH_RENTALS_SUCCESS';
 export const FETCH_RENTALS_FAIL = 'FETCH_RENTALS_FAIL';
 
 // Single rental actions

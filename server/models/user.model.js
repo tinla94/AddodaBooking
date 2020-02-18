@@ -33,9 +33,10 @@ const userSchema = new Schema({
     max: [32, 'Too long, max is 32 characters'],
     required: 'Password is required'
   },
-  avartar: {
+  avatar: {
     type: String,
-    trim: true
+    trim: true,
+    default: ''
   },
   stripeCustomerId: String,
   revenue: Number,

@@ -6,6 +6,7 @@
     cursor: pointer;
     letter-spacing: 2px;
     transition: all .3s;
+    text-decoration: none;
 
     &-link {
         text-decoration: none !important;
@@ -49,5 +50,12 @@
     &-dark-gray:hover {
         background: $main-black-color;
         color: white;
+    }
+
+    &-manage {
+        padding: .5rem 1rem !important;
+        border-radius: 5px !important;
+        letter-spacing: 0 !important;
+        margin: 1rem;
     }
 }

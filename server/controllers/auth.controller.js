@@ -49,7 +49,7 @@ exports.signin = async (req, res) => {
         jwt.sign(payload, keys.SECRET, { expiresIn: 360000 }, (err, token) => {
             if (err) throw err;
 
-            return res.status(200).json({ msg: 'Signing in user account...', user, token });
+            return res.status(200).json({ user, token });
         })
     } catch (err) {
         console.log(err.message)
@@ -64,7 +64,7 @@ exports.signin = async (req, res) => {
 
 // Registering user
 exports.signup = async (req, res) => {
-    const { firstname, lastname, email, password, passwordConfirmation } = req.body;
+    const { firstname, lastname, username, email, country, password, passwordConfirmation } = req.body;
     const errors = validationResult(req);
 
     // check validation

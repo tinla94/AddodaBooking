@@ -1,0 +1,30 @@
+.profile {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin: 0;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    &-container {
+        text-align: center;
+        letter-spacing: 2px;
+        padding: 0 20%;
+    }
+
+    &-manage-buttons {
+        margin-top: 2rem;
+    }
+
+    &-avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        img {
+            width: 50%;
+            margin-bottom: 1rem;
+        }
+    }
+}
