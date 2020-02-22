@@ -9,7 +9,8 @@ import {
     FETCH_RENTAL_BY_ID_INIT,
     FETCH_RENTAL_BY_ID_SUCCESS,
     UPDATE_RENTAL_SUCCESS,
-    UPDATE_RENTAL_FAIL
+    UPDATE_RENTAL_FAIL,
+    RESET_RENTAL_ERRORS
 } from './types';
 import authService from '../services/auth-service';
 
@@ -115,3 +116,9 @@ export const deleteRental = (rentalId) => {
         err => Promise.reject(err.response.data.errors)
     )
 }
+
+export const resetRentalErrors = () => {
+    return {
+      type: RESET_RENTAL_ERRORS
+    }
+  }

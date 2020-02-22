@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../../actions/user.action';
-import CenterContainer from '../../utils/hoc/Center-Container';
+import CenterLayout from '../../utils/layout/Center-Layout';
 import UserDefaultPicture from '../../images/user-profile-icon.png';
 
 
@@ -54,7 +54,7 @@ class UserProfile extends React.Component {
         const { user } = this.state;
 
         return (
-            <CenterContainer>
+            <CenterLayout>
                 <div className="profile">
                     <div className="profile-container">
                         {this.renderUserAvatar()}
@@ -65,7 +65,7 @@ class UserProfile extends React.Component {
                         {this.renderMangeButtons()}
                     </div>
                 </div>
-            </CenterContainer>
+            </CenterLayout>
         )
     }
 }

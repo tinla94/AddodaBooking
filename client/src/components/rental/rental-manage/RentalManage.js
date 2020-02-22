@@ -1,4 +1,5 @@
 import React from 'react';
+import PageLayout from '../../../utils/layout/Page-Layout';
 import { deleteRental } from '../../../actions/rentals.action';
 import { getUserRentals } from '../../../actions/user.action';
 import { Link } from 'react-router-dom';
@@ -49,17 +50,18 @@ export class RentalManage extends React.Component {
     const { userRentals, isFetching } = this.state;
 
     return (
-      <section id='userRentals' className="page-layout-two">
+      <PageLayout>
+      <section id='userRentals'>
           <div className="profile-sublinks">
             <Link
-              to="/user/profile"
+              to="/user/account"
               className="profile-sublinks-link-1"
             >
               Profile
             </Link>
             /
             <Link
-              to="/user/profile/bookings-manage"
+              to="/user/account/bookings-manage"
               className="profile-sublinks-link-2"
             >
               Manage bookings
@@ -80,6 +82,7 @@ export class RentalManage extends React.Component {
           </div>
         }
       </section>
+      </PageLayout>
     )
   }
 }

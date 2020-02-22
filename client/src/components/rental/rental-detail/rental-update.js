@@ -14,8 +14,9 @@ import { EditableSelect } from '../../../utils/edit-form/EditableSelect';
 import { EditableImage } from '../../../utils/edit-form/EditableImage';
 
 // actions
-import { getRentalById, verifyRentalOwner, updateRental } from '../../../actions/rentals.action'
-import * as actions from 'actions';
+import { getRentalById, verifyRentalOwner, updateRental, resetRentalErrors } from '../../../actions/rentals.action'
+
+
 
 class RentalUpdate extends React.Component {
 
@@ -50,7 +51,7 @@ class RentalUpdate extends React.Component {
   }
 
   resetRentalErrors() {
-    this.props.dispatch(actions.resetRentalErrors());
+    this.props.dispatch(resetRentalErrors());
   }
 
   verifyRentalOwner() {

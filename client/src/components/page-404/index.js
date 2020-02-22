@@ -1,11 +1,11 @@
 import React from 'react';
-import CenterContainer from 'utils/hoc/Center-Container.js';
+import CenterLayout from '../../utils/layout/Center-Layout';
 
 
 const Page404 = () => (
-    <CenterContainer>
+    <CenterLayout>
         <h1>404! Page is not found!</h1>
-    </CenterContainer>
+    </CenterLayout>
 );
 
 export default Page404;

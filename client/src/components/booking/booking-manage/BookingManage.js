@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PageLayout from '../../../utils/layout/Page-Layout';
 import { BookingCard, PaymentCard } from './BookingCard';
 import { fetchUserBookings } from '../../../actions/bookings-payments.action';
 import { getPendingPayments, acceptPayment, declinePayment } from '../../../actions/bookings-payments.action';
@@ -65,18 +66,18 @@ class BookingManage extends React.Component {
     const { pendingPayments } = this.state;
 
     return (
-      <React.Fragment>
+      <PageLayout>
         <div className="user-bookings">
           <div className="profile-sublinks">
             <Link
-              to="/user/profile"
+              to="/user/account"
               className="profile-sublinks-link-1"
             >
               Profile
             </Link>
             /
             <Link
-              to="/user/profile/rentals-manage"
+              to="/user/account/rentals-manage"
               className="profile-sublinks-link-2"
             >
               Manage rentals
@@ -110,7 +111,7 @@ class BookingManage extends React.Component {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </PageLayout>
     )
   }
 }

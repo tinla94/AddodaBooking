@@ -15,7 +15,7 @@ const RentalCreateForm = props => {
         name="title"
         type="text"
         label='Title'
-        className='form-control'
+        className='bwm-form__input'
         component={FormInput}
       />
        <Field
@@ -30,21 +30,21 @@ const RentalCreateForm = props => {
         name="street"
         type="text"
         label='Street'
-        className='form-control'
+        className='bwm-form__input'
         component={FormInput}
       />
       <Field
         name="city"
         type="text"
         label='City'
-        className='form-control'
+        className='bwm-form__input'
         component={FormInput}
       />
       <Field
         name="country"
         type="text"
         label='Country'
-        className='form-control'
+        className='bwm-form__input'
         component={FormInput}
       />
       <Field

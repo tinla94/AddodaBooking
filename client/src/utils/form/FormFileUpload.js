@@ -33,9 +33,9 @@ export class FormFileUpload extends React.Component {
       const imageBase64 = event.target.result;
 
       if (initialImageBase64) {
-        this.setState({imageBase64});
+        this.setState({ imageBase64 });
       } else {
-        this.setState({imageBase64, initialImageBase64: imageBase64});
+        this.setState({ imageBase64, initialImageBase64: imageBase64 });
       }
     });
   }
@@ -93,19 +93,19 @@ export class FormFileUpload extends React.Component {
       const img = new Image();
       img.src = initialImageBase64;
 
-      const croppedImage =  await getCroppedImg(img, pixelCrop, selectedFile.name);
-      this.setState({croppedImage});
+      const croppedImage = await getCroppedImg(img, pixelCrop, selectedFile.name);
+      this.setState({ croppedImage });
 
       this.reader.readAsDataURL(croppedImage);
     }
   }
 
   onError(error) {
-    this.setState({pending: false, status: 'FAIL'});
+    this.setState({ pending: false, status: 'FAIL' });
   }
 
   onSuccess(uploadedImage) {
-    const {onChange} = this.props.input || this.props;
+    const { onChange } = this.props.input || this.props;
 
     this.resetToDefaultState('OK');
 
@@ -117,10 +117,10 @@ export class FormFileUpload extends React.Component {
 
     if (croppedImage) {
 
-      this.setState({pending: true, status: 'INIT'});
+      this.setState({ pending: true, status: 'INIT' });
       actions.uploadImage(croppedImage).then(
         (uploadedImage) => { this.onSuccess(uploadedImage) },
-        (error) => { this.onError(error)})
+        (error) => { this.onError(error) })
     }
   }
 
@@ -133,7 +133,7 @@ export class FormFileUpload extends React.Component {
           <div className='img-spinning-circle'>
           </div>
         </div>
-        )
+      )
     }
   }
 
@@ -154,34 +154,41 @@ export class FormFileUpload extends React.Component {
 
     return (
       <div className='img-upload-container'>
-        <label className='img-upload button button-gray'>
-         <span className='upload-text'> Select an image </span>
-         <input type='file'
-                accept='.jpg, .png, .jpeg'
-                onChange={this.onChange}/>
+        <label className='img-upload' style={{ margin: '1rem 0' }}>
+          <p>         
+            <span className="button button-gray">
+              <i class="fas fa-file-image"></i>
+            </span> 
+            <span style={{ marginLeft: '5px' }}>Upload an image</span>
+          </p>
+          <input type='file'
+            accept='.jpg, .png, .jpeg'
+            onChange={this.onChange} />
         </label>
-
-        { selectedFile &&
+        <br />
+        {selectedFile &&
           <button className='btn btn-success btn-upload'
-                  type='button'
-                  disabled={!selectedFile}
-                  onClick={() => this.uploadImage()}>
-              Upload Image
+            type='button'
+            disabled={!selectedFile}
+            onClick={() => this.uploadImage()}
+            style={{ marginBottom: '1rem' }}  
+          >
+            Add Image
           </button>
         }
 
-        { initialImageBase64 &&
+        {initialImageBase64 &&
           <ReactCrop src={initialImageBase64}
-                     crop={crop}
-                     onChange={(crop) => this.onCropChange(crop)}
-                     onImageLoaded={(image) => this.onImageLoaded(image)}
-                     onComplete={(crop, pixelCrop) => this.onCropCompleted(crop, pixelCrop)} />
+            crop={crop}
+            onChange={(crop) => this.onCropChange(crop)}
+            onImageLoaded={(image) => this.onImageLoaded(image)}
+            onComplete={(crop, pixelCrop) => this.onCropCompleted(crop, pixelCrop)} />
         }
 
-        { imageBase64 &&
+        {imageBase64 &&
           <div className='img-preview-container'>
             <div className='img-preview'
-                 style={{'backgroundImage': 'url(' + imageBase64 + ')'}}>
+              style={{ 'backgroundImage': 'url(' + imageBase64 + ')' }}>
             </div>
 
             {this.renderSpinningCircle()}
