@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import RentalMap from './rental-map';
 import Booking from 'components/booking/Booking';
 
-import { UserGuard } from '../../shared/auth/UserGuard';
+import { UserGuard } from '../../../utils/routes/UserGuard';
 import { RentalAssets } from './rental-asset';
 import { toUpperCase } from 'helpers';
 
 // edit form
-import { EditableInput } from '../../shared/editable/EditableInput';
-import { EditableText } from '../../shared/editable/EditableText';
-import { EditableSelect } from '../../shared/editable/EditableSelect';
-import { EditableImage } from '../../shared/editable/EditableImage';
+import { EditableInput } from '../../../utils/edit-form/EditableInput';
+import { EditableText } from '../../../utils/edit-form/EditableText';
+import { EditableSelect } from '../../../utils/edit-form/EditableSelect';
+import { EditableImage } from '../../../utils/edit-form/EditableImage';
 
 // actions
 import { getRentalById, verifyRentalOwner, updateRental } from '../../../actions/rentals.action'

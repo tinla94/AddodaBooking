@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../../actions/user.action';
+import CenterContainer from '../../utils/hoc/Center-Container';
 import UserDefaultPicture from '../../images/user-profile-icon.png';
 
 
@@ -21,11 +22,11 @@ class UserProfile extends React.Component {
     renderMangeButtons() {
         return (
             <div className="profile-manage-buttons">
-                <Link 
+                <Link
                     to="/user/account/rentals-manage"
                     className="button button-manage button-dark-gray"
                 >Your Rentals</Link>
-                <Link 
+                <Link
                     to="/user/account/bookings-manage"
                     className="button button-manage button-dark-gray"
                 >Your Bookings</Link>
@@ -41,9 +42,9 @@ class UserProfile extends React.Component {
                 <img src={
                     user.avatar === '' ? UserDefaultPicture : user.avatar
                 } alt="user-avatar" />
-                <button 
+                <button
                     className="btn btn-link"
-                    
+
                 >Change avatar</button>
             </div>
         )
@@ -53,16 +54,18 @@ class UserProfile extends React.Component {
         const { user } = this.state;
 
         return (
-            <div className="profile">
-                <div className="profile-container">
-                    {this.renderUserAvatar()}
-                    <hr />
-                    <h2>{user.firstname} {user.lastname}</h2>
-                    <h6>Joined on {user.joined}</h6>
-                    {/* Buttons */}
-                    {this.renderMangeButtons()}
+            <CenterContainer>
+                <div className="profile">
+                    <div className="profile-container">
+                        {this.renderUserAvatar()}
+                        <hr />
+                        <h2>{user.firstname} {user.lastname}</h2>
+                        <h6>Joined on {user.joined}</h6>
+                        {/* Buttons */}
+                        {this.renderMangeButtons()}
+                    </div>
                 </div>
-            </div>
+            </CenterContainer>
         )
     }
 }

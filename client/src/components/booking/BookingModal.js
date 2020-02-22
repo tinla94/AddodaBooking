@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
-import { FormError } from 'components/shared/form/FormError';
+import { FormError } from '../../utils/form/FormError';
 
 export function BookingModal(props) {
   const { open,

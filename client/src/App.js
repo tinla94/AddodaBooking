@@ -4,10 +4,11 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { StripeProvider } from 'react-stripe-elements';
 
-// Utils components
 import { ToastContainer } from 'react-toastify';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Header from 'components/header/Header';
+
+// Header/Footer components
+import Header from 'components/header-footer/Header';
 
 // Rental components
 import RentalListing from 'components/rental/rental-listing/rental-listing';
@@ -29,8 +30,8 @@ import { Register } from 'components/auth/signup/signup';
 import Page404 from 'components/page-404';
 
 // Protected route
-import { ProtectedRoute } from 'components/shared/auth/ProtectedRoute';
-import { LoggedinRoute } from './components/shared/auth/LoggedinRoute';
+import { ProtectedRoute } from './utils/routes/ProtectedRoute';
+import { LoggedinRoute } from './utils/routes/LoggedinRoute';
 
 // actions
 import { checkAuthState, logout } from './actions/auth.action';
