@@ -7,11 +7,14 @@ import { UserGuard } from '../../shared/auth/UserGuard';
 import { RentalAssets } from './rental-asset';
 import { toUpperCase } from 'helpers';
 
+// edit form
 import { EditableInput } from '../../shared/editable/EditableInput';
 import { EditableText } from '../../shared/editable/EditableText';
 import { EditableSelect } from '../../shared/editable/EditableSelect';
 import { EditableImage } from '../../shared/editable/EditableImage';
 
+// actions
+import { getRentalById, verifyRentalOwner, updateRental } from '../../../actions/rentals.action'
 import * as actions from 'actions';
 
 class RentalUpdate extends React.Component {
@@ -33,7 +36,7 @@ class RentalUpdate extends React.Component {
     // Dispatch action
     const rentalId = this.props.match.params.id;
 
-    this.props.dispatch(actions.fetchRentalById(rentalId));
+    this.props.dispatch(getRentalById(rentalId));
   }
 
   componentDidMount() {
@@ -43,7 +46,7 @@ class RentalUpdate extends React.Component {
   updateRental(rentalData) {
     const {rental: {_id}, dispatch } = this.props;
 
-    dispatch(actions.updateRental(_id, rentalData));
+    dispatch(updateRental(_id, rentalData));
   }
 
   resetRentalErrors() {
@@ -54,7 +57,7 @@ class RentalUpdate extends React.Component {
     const rentalId = this.props.match.params.id;
     this.setState({isFetching: true});
 
-    return actions.verifyRentalOwner(rentalId).then(
+    return verifyRentalOwner(rentalId).then(
       () => {
         this.setState({isAllowed: true, isFetching: false})
       },

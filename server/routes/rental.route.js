@@ -17,14 +17,15 @@ router.get('/all', getAllRentals);
 router.get('/:id', getRental);
 
 
-// @route   POST api/rentals/edit/:id
-// @desc    Get single rental
+// @route   POST api/rentals/create
+// @desc    Create a rental
 // @access  Private
 router.post('/create', [
   requireLogin,
   [
     check('title', 'Tittle is required').not().isEmpty(),
     check('city', 'City is required').not().isEmpty(),
+    check('country', 'Country is required').not().isEmpty(),
     check('address', 'Address is required').not().isEmpty(),
     check('category', 'Category is required').not().isEmpty()
   ]

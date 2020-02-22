@@ -40,11 +40,3 @@ export const getUserRentals = () => {
     )
 }
 
-
-// Get user bookings
-export const getUserBookings = () => {
-    return axiosInstance.get('/users/bookings-manage').then(
-        res => res.data, 
-        err => Promise.reject(err.response.data.errors)
-    )
-}

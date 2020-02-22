@@ -1,7 +1,7 @@
 const User = require('../models/user.model')
 const Rental = require('../models/rental.model');
 const { validationResult } = require('express-validator');
-const normalizeErrors = require('../helpers/mongoose-error');
+const { normalizeErrors } = require('../helpers/mongoose-error');
 
 // Check rental owner
 exports.checkRentalOwner = async (req, res) => {
@@ -35,39 +35,45 @@ exports.checkRentalOwner = async (req, res) => {
 // Create Rental
 exports.createRental = async (req, res) => {
     const user = req.user;
-    const errors = validationResult(req);
+    // const errors = validationResult(req);
 
-    // check errors 
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+    // // check errors 
+    // if (!errors.isEmpty()) {
+    //     return res.status(400).json({ errors: errors.array() });
+    // }
 
-    try {
-        const rental = await new Rental({ ...req.body, user: user.id });
+    // try {
+    //     const rental = await new Rental(req.body);
+    //     rental.user = user._id;
 
-        // add rentals to User model
-        User.update({ _id: user.id }, { $push: { rentals: rental } }, function () { });
+    //     // add rentals to User model
+    //     await User.update({ _id: user._id }, { $push: { rentals: rental } }, function () { });
 
-        // save rental
-        await rental.save((err) => {
-            if (err) {
-                return res.status(400).send({
-                    errors: normalizeErrors(err.errors)
-                });
-            }
-        });
+    //     // save rental
+    //     await rental.save();
 
-        // return rental
-        res.status(201).json(rental);
-    } catch (err) {
-        console.log(err.message)
-        return res.status(500).send({
-            errors: [{
-                title: 'Something wrong...',
-                detail: 'Oops! Internal Server Error'
-            }]
-        });
-    };
+    //     // return rental
+    //     res.status(201).json(rental);
+    // } catch (err) {
+    //     console.log(err.message)
+    //     return res.status(500).send({
+    //         errors: err
+    //     });
+    // };
+    const { title, city, street, category, image, shared, bedrooms, description, dailyRate } = req.body;
+  
+    const rental = new Rental({title, city, street, category, image, shared, bedrooms, description, dailyRate});
+    rental.user = user;
+  
+    Rental.create(rental, function(err, newRental) {
+      if (err) {
+        return res.status(422).send({errors: normalizeErrors(err.errors)});
+      }
+  
+      User.update({_id: user.id}, { $push: {rentals: newRental}}, function(){});
+  
+      return res.json(newRental);
+    });
 }
 
 // Update Rental

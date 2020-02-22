@@ -143,15 +143,6 @@ exports.getUserBookings = async (req, res) => {
   try {
     const foundBookings = await Booking.where({ user: req.user.id });
 
-    if (foundBookings.length === 0) {
-      return res.status(400).json({
-        errors: [{
-          title: 'Something wrong...',
-          detail: 'No bookings found on your list'
-        }]
-      });
-    }
-
     // return bookings
     return res.status(200).json(foundBookings);
   } catch (err) {
@@ -169,16 +160,6 @@ exports.getUserBookings = async (req, res) => {
 exports.getUserRentals = async (req, res) => {
   try {
     const foundRentals = await Rental.where({ user: req.user.id });
-
-    if (foundRentals.length === 0) {
-      console.log('0 rentals')
-      return res.status(400).json({
-        errors: [{
-          title: 'Something wrong...',
-          details: 'No rentals on your list'
-        }]
-      });
-    }
 
     // return rentals
     return res.status(200).json(foundRentals);

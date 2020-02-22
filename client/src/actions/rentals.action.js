@@ -1,6 +1,5 @@
 import axios from 'axios';
 import axiosService from '../services/axios-service';
-
 import {
     RELOAD_MAP,
     RELOAD_MAP_FINISH,
@@ -12,8 +11,9 @@ import {
     UPDATE_RENTAL_SUCCESS,
     UPDATE_RENTAL_FAIL
 } from './types';
+import authService from '../services/auth-service';
 
-
+// define axios
 const axiosInstance = axiosService.getInstance();
 
 
@@ -83,14 +83,14 @@ export const getRentalById = (rentalId) => {
 // Create rental
 export const createRental = (rentalData) => {
     return axiosInstance.post('/rentals/create', rentalData).then(
-        res => res.data,
-        err => Promise.reject(err.response.data.errors)
+      res => res.data,
+      err => Promise.reject(err.response.data.errors)
     )
 }
 
 // Update rental
 export const updateRental = (rentalId, rentalData) => async dispatch => {
-    axiosInstance.patch(`/rentals/edit/${rentalId}`, rentalData)
+    return axiosInstance.patch(`/rentals/edit/${rentalId}`, rentalData)
     .then(res => res.data)
     .then(updatedRental => {
         dispatch({

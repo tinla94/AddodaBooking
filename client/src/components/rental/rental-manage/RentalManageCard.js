@@ -1,7 +1,6 @@
 import React from 'react';
 import { toUpperCase, pretifyDate } from 'helpers';
 import { Link } from 'react-router-dom';
-import { LightSpeed } from 'react-reveal';
 
 export class RentalManageCard extends React.Component {
 

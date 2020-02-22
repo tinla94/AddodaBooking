@@ -1,13 +1,12 @@
 import React from 'react';
 import { MapWithGeocode} from 'components/map/GoogleMap';
 import { connect } from 'react-redux';
-
-import * as actions from 'actions';
+import { reloadMapFinish } from '../../../actions/rentals.action';
 
 class RentalMap extends React.Component {
 
   reloadMapFinish() {
-    this.props.dispatch(actions.reloadMapFinish());
+    this.props.dispatch(reloadMapFinish());
   }
 
   render() {

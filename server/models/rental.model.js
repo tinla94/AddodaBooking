@@ -7,7 +7,7 @@ const rentalSchema = new Schema({
     required: true, 
     max: [128, 'Maximum is 128 characters.']
   },
-  street: { 
+  address: { 
     type: String, 
     required: true, 
     min: [4, 'Minimum is 4 characters']
@@ -46,7 +46,10 @@ const rentalSchema = new Schema({
     required: true,
     min: [20, 'Please write 20 - 100 words about the place']
   },
-  dailyRate: Number,
+  dailyRate: {
+    type: Number,
+    default: 0
+  },
   createdAt: { 
     type: Date, 
     default: Date.now 

@@ -5,7 +5,7 @@ import { FormSelect } from 'components/shared/form/FormSelect';
 import { FormTextArea } from 'components/shared/form/FormTextArea';
 import { FormFileUpload } from 'components/shared/form/FormFileUpload';
 import { FormError } from 'components/shared/form/FormError';
-// import { required, minLength4 } from 'components/shared/form/validators';
+
 
 const RentalCreateForm = props => {
   const { handleSubmit, pristine, submitting, submitCb, valid, options, errors } = props
@@ -27,6 +27,13 @@ const RentalCreateForm = props => {
         component={FormTextArea}
       />
       <Field
+        name="street"
+        type="text"
+        label='Street'
+        className='form-control'
+        component={FormInput}
+      />
+      <Field
         name="city"
         type="text"
         label='City'
@@ -34,9 +41,9 @@ const RentalCreateForm = props => {
         component={FormInput}
       />
       <Field
-        name="street"
+        name="country"
         type="text"
-        label='Street'
+        label='Country'
         className='form-control'
         component={FormInput}
       />

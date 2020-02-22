@@ -2,10 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { BookingCard, PaymentCard } from './BookingCard';
-
-import * as actions from 'actions';
-import { LightSpeed, Fade } from 'react-reveal';
-
+import { fetchUserBookings } from '../../../actions/bookings-payments.action';
+import { getPendingPayments, acceptPayment, declinePayment } from '../../../actions/bookings-payments.action';
 
 
 
@@ -16,18 +14,18 @@ class BookingManage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(actions.fetchUserBookings());
+    this.props.dispatch(fetchUserBookings());
     this.getPendingPayments();
   }
 
   getPendingPayments() {
-    actions.getPendingPayments()
-      .then(pendingPayments => this.setState({pendingPayments}))
+    getPendingPayments()
+      .then(pendingPayments => this.setState({ pendingPayments }))
       .catch(err => console.error(err));
   }
 
   acceptPayment(payment) {
-    actions.acceptPayment(payment)
+    acceptPayment(payment)
       .then(status => {
         this.getPendingPayments();
       })
@@ -35,7 +33,7 @@ class BookingManage extends React.Component {
   }
 
   declinePayment(payment) {
-    actions.declinePayment(payment)
+    declinePayment(payment)
       .then(status => {
         this.getPendingPayments();
       })
@@ -48,9 +46,9 @@ class BookingManage extends React.Component {
 
   renderPayments(payments) {
     return payments.map((payment, index) => <PaymentCard booking={payment.booking}
-                                                         payment={payment}
-                                                         paymentBtns={this.renderPaymentButtons}
-                                                         key={index} />);
+      payment={payment}
+      paymentBtns={this.renderPaymentButtons}
+      key={index} />);
   }
 
   renderPaymentButtons = (payment) => {
@@ -68,30 +66,50 @@ class BookingManage extends React.Component {
 
     return (
       <React.Fragment>
-        <section id="userBookings" className="page-layout-two">
-          <h1 className="page-title"><span style={{color: '#db5b06'}}>My</span> Bookings</h1>
-          <div className="row">
-            { this.renderBookings(bookings) }
+        <div className="user-bookings">
+          <div className="profile-sublinks">
+            <Link
+              to="/user/profile"
+              className="profile-sublinks-link-1"
+            >
+              Profile
+            </Link>
+            /
+            <Link
+              to="/user/profile/rentals-manage"
+              className="profile-sublinks-link-2"
+            >
+              Manage rentals
+            </Link>
           </div>
-          { !isFetching && bookings.length === 0 &&
-              <div className="alert alert-warning">
-              You currently have no bookings. Check out our available bookings today!
-              <br />
-              <Link style={{'marginLeft': '10px', margin: '5px auto 0 auto'}} className="btn btn-dark" to="/rentals" >Check Rentals </Link>
-            </div>
-          }
-        </section>
-        <section id="pendingBookings" className="page-layout-two">
-          <h1 className="page-title">Pending <span style={{color: '#db5b06'}}>Bookings</span></h1>
           <div className="row">
-          { this.renderPayments(pendingPayments) }
-          </div>
-          { !isFetching && pendingPayments.length === 0 &&
-            <div className="alert alert-warning">
-              You are currently having no pending bookings...
+            <div className="col-sm-6 col-xs-12">
+              <h1 className="page-title">Manage Bookings</h1>
+              <hr />
+              <div className="row">
+                {this.renderBookings(bookings)}
+              </div>
+              {!isFetching && bookings.length === 0 &&
+                <div className="alert alert-warning">
+                  You currently have no bookings. Book your place today!
+              <Link className="btn btn-link" to="/rentals" >Check Rentals </Link>
+                </div>
+              }
             </div>
-          }
-        </section>
+            <div className="col-sm-6 col-xs-12">
+              <h1 className="page-title">Pending Bookings</h1>
+              <hr />
+              <div className="row">
+                {this.renderPayments(pendingPayments)}
+              </div>
+              {!isFetching && pendingPayments.length === 0 &&
+                <div className="alert alert-warning">
+                  You are currently having no pending bookings...
+            </div>
+              }
+            </div>
+          </div>
+        </div>
       </React.Fragment>
     )
   }

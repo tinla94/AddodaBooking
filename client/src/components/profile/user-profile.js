@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../../actions/user.action';
-import UserDefaultPicture from '../../image/user-profile-icon.png';
+import UserDefaultPicture from '../../images/user-profile-icon.png';
 
 
 class UserProfile extends React.Component {
@@ -22,11 +22,11 @@ class UserProfile extends React.Component {
         return (
             <div className="profile-manage-buttons">
                 <Link 
-                    to="/user/profile/rentals-manage"
+                    to="/user/account/rentals-manage"
                     className="button button-manage button-dark-gray"
                 >Your Rentals</Link>
                 <Link 
-                    to="/user/profile/bookings-manage"
+                    to="/user/account/bookings-manage"
                     className="button button-manage button-dark-gray"
                 >Your Bookings</Link>
             </div>

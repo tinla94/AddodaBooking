@@ -26,5 +26,23 @@
             width: 50%;
             margin-bottom: 1rem;
         }
+
+        .button-link {
+            font-weight: bold;
+        }
+    }
+}
+
+.profile-sublinks {
+    margin: .5rem 0 3rem;
+    letter-spacing: .5px;
+    font-size: 18px;
+
+    &-link-1 {
+        margin-right: 5px;
+    }
+
+    &-link-2 {
+        margin-left: 5px;
     }
 }

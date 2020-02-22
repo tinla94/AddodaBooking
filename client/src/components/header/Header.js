@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import authService from '../../services/auth-service';
 
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
 
   handleLogout() {
     this.props.logout();
@@ -13,7 +18,10 @@ class Header extends React.Component {
   renderAuthButtons(isAuth) {
     if (isAuth) {
       return <li>
-        <span className='nav-item nav-link clickable' onClick={this.handleLogout}>Sign Out
+        <span 
+          className='nav-item nav-link clickable' 
+          onClick={this.handleLogout}>
+          Sign Out
         </span>
       </li>
     }
@@ -21,49 +29,25 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         <li>
-          <Link className='nav-item nav-link' to='/login'>Sign In
-          <span className='sr-only'>(current)</span>
+          <Link 
+            className='nav-item nav-link' 
+            to='/auth/login'>
+            Sign In
           </Link>
         </li>
         <li>
-          <Link className='nav-item nav-link' to='/register'>Register
+          <Link 
+            className='nav-item nav-link' 
+            to='/auth/register'>
+            Register
           </Link>
         </li>
       </React.Fragment>
     )
   }
 
-  // Owner section 
-  // renderOwnerSection(isAuth) {
-  //   if (isAuth) {
-  //     return (
-  //       // <div className="nav-item dropdown">
-  //       //   <div className="nav-link nav-item dropdown-toggle clickable" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  //       //     Owner Section
-  //       //   </div>
-  //       //   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-  //           // <Link className="dropdown-item" to="/rentals/new">Create Rental</Link>
-  //           // <Link className="dropdown-item" to="/rentals/manage">Manage Rentals</Link>
-  //           // <Link className="dropdown-item" to="/bookings/manage">Manage Bookings</Link>
-  //       //   </div>
-  //       // </div>
-  //       <Dropdown>
-  //         <Dropdown.Toggle variant="link" className="nav-link nav-item dropdown" id="dropdown-basic">
-  //           Owner Section
-  //         </Dropdown.Toggle>
-
-  //         <Dropdown.Menu>
-  //         <Link className="dropdown-item" to="/rentals/new">Create Rental</Link>
-  //           <Link className="dropdown-item" to="/rentals/manage">Manage Rentals</Link>
-  //           <Link className="dropdown-item" to="/bookings/manage">Manage Bookings</Link>
-  //         </Dropdown.Menu>
-  //       </Dropdown>
-  //     )
-  //   }
-  // }
-
   render() {
-    const { username, isAuth } = this.props.auth;
+    const { isAuth } = this.props.auth;
 
 
     return (
@@ -74,10 +58,10 @@ class Header extends React.Component {
           </Link>
           <ul className='header-links'>
             <li><Link className='nav-item nav-link' to='/'>Home</Link></li>
-            <li><Link className='nav-item nav-link' to='/'>Contact Us</Link></li>
+            <li><Link className='nav-item nav-link' to='/contact-us'>Contact Us</Link></li>
             {isAuth &&
               <li>
-                <Link className='nav-item nav-link' to='/user/profile'>
+                <Link className='nav-item nav-link' to='/user/account'>
                   Profile
                 </Link>
               </li>

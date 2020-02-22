@@ -11,6 +11,7 @@
 @import 'editable/editable-component.scss';
 @import 'payment/payment';
 @import 'profile/profile';
+@import 'containers/page-container.scss';
 
 
 html, body {
@@ -23,8 +24,8 @@ html, body {
 }
 
 li, a {
-  list-style-type: none;
-  text-decoration: none;
+  list-style-type: none !important;
+  text-decoration: none !important;
 }
 
 .clickable {

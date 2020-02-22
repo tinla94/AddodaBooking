@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import * as moment from 'moment';
+import moment from 'moment';
 
 class AuthService {
 
