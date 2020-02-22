@@ -2,6 +2,10 @@ const User = require('../models/user.model')
 const Rental = require('../models/rental.model');
 const { validationResult } = require('express-validator');
 const { normalizeErrors } = require('../helpers/mongoose-error');
+// importing aws 
+const { singleImageUpload } = require('../services/aws/image-upload');
+const hotelImageUpload = singleImageUpload.single('hotelImage');
+
 
 // Check rental owner
 exports.checkRentalOwner = async (req, res) => {
@@ -35,45 +39,28 @@ exports.checkRentalOwner = async (req, res) => {
 // Create Rental
 exports.createRental = async (req, res) => {
     const user = req.user;
-    // const errors = validationResult(req);
+    const errors = validationResult(req);
 
-    // // check errors 
-    // if (!errors.isEmpty()) {
-    //     return res.status(400).json({ errors: errors.array() });
-    // }
+    // check errors 
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
-    // try {
-    //     const rental = await new Rental(req.body);
-    //     rental.user = user._id;
+    try {
+        const rental = await new Rental({ ...req.body, user: user._id });
 
-    //     // add rentals to User model
-    //     await User.update({ _id: user._id }, { $push: { rentals: rental } }, function () { });
+        // add rentals to User model
+        await User.update({ _id: user._id }, { $push: { rentals: rental } }, function () { });
 
-    //     // save rental
-    //     await rental.save();
-
-    //     // return rental
-    //     res.status(201).json(rental);
-    // } catch (err) {
-    //     console.log(err.message)
-    //     return res.status(500).send({
-    //         errors: err
-    //     });
-    // };
-    const { title, city, street, category, image, shared, bedrooms, description, dailyRate } = req.body;
-  
-    const rental = new Rental({title, city, street, category, image, shared, bedrooms, description, dailyRate});
-    rental.user = user;
-  
-    Rental.create(rental, function(err, newRental) {
-      if (err) {
-        return res.status(422).send({errors: normalizeErrors(err.errors)});
-      }
-  
-      User.update({_id: user.id}, { $push: {rentals: newRental}}, function(){});
-  
-      return res.json(newRental);
-    });
+        // save rental
+        await rental.save();
+        res.status(201).json(rental);
+    } catch (err) {
+        console.log(err.message)
+        return res.status(500).send({
+            errors: err
+        });
+    };
 }
 
 // Update Rental
@@ -231,4 +218,22 @@ exports.getRental = async (req, res) => {
         });
     };
 }
+
+
+// Upload rental image
+exports.hotelImageUpload = (req, res) => {
+    hotelImageUpload(req, res, (err) => {
+        if(err) {
+            return res.status(400).json({
+                errors: [{
+                    title: 'Image Upload Error',
+                    detail: err.message
+                }]
+            })
+        }
+
+        // add image
+        return res.json({ 'hotelImageUrl': req.file.location });
+    });
+};
 

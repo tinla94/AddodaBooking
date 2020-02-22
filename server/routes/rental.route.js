@@ -2,7 +2,15 @@ const express = require('express');
 const router = express.Router();
 const requireLogin = require('../middlewares/requireLogin');
 const { check } = require('express-validator');
-const { getAllRentals, getRental, createRental, updateRental, deleteRental, checkRentalOwner } = require('../controllers/rental.controller');
+const { 
+  getAllRentals, 
+  getRental, 
+  createRental, 
+  updateRental, 
+  deleteRental, 
+  checkRentalOwner,
+  hotelImageUpload
+} = require('../controllers/rental.controller');
 
 
 // @route   GET api/rentals/all
@@ -30,6 +38,12 @@ router.post('/create', [
     check('category', 'Category is required').not().isEmpty()
   ]
 ], createRental);
+
+
+// @route   POST api/rentals/image-upload
+// @desc    Add image for rental
+// @access  Private
+router.post('/image-upload', requireLogin, hotelImageUpload);
 
 
 // @route   PATCH api/rentals/edit/:id

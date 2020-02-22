@@ -5,9 +5,9 @@ const path = require('path');
 const keys = require('../../config/keys');
 
 const s3 = new aws.S3({
-  secretAccessKey: keys.AWS_SECRET_ACCESS_KEY,
   accessKeyId: keys.AWS_ACCESS_KEY_ID,
-  region: 'us-east-1'
+  secretAccessKey: keys.AWS_SECRET_ACCESS_KEY,
+  region: 'us-west-1'
 });
 
 const checkFileType = (req, file, cb) => {
@@ -21,12 +21,12 @@ const checkFileType = (req, file, cb) => {
 
 
 // single image upload
-exports.profileImageUpload = multer({
+exports.singleImageUpload = multer({
   checkFileType,
   storage: multerS3({
     acl: 'public-read',
     s3,
-    bucket: 'adoddabooking-bucket',
+    bucket: 'overnightbooking-bucket',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: 'TESTING_METADATA'});
     },
@@ -35,15 +35,15 @@ exports.profileImageUpload = multer({
     }
   }),
   limits: { fileSize: 2000000 }
-}).single('profileImage');
+});
 
 
 // multiple images upload
-exports.hotelImageUpload = multer({
+exports.multipleImageUpload = multer({
   checkFileType,
   storage: multerS3({
     s3,
-    bucket: 'adoddabooking-bucket',
+    bucket: 'overnightbooking-bucket',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: 'TESTING_METADATA'});
     },
@@ -52,6 +52,6 @@ exports.hotelImageUpload = multer({
     }
   }),
   limits: { fileSize: 2000000 }
-}).array('hotelImage', 4);
+}).array('multipleImage', 4);
 
 

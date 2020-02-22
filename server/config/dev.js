@@ -3,11 +3,10 @@ module.exports = {
     REDIS_URL: 'redis://127.0.0.1:6379',
     SECRET: 'tintinla',
     COOKIE_SECRET: '123123123',
-    AWS_ACCESS_KEY_ID: 'AKIAILHU6VZFH6DETNUA',
-    AWS_SECRET_ACCESS_KEY: '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',
+    AWS_ACCESS_KEY_ID: 'AKIAYZWP6XT5ZSPVOO2Y',
+    AWS_SECRET_ACCESS_KEY: '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',
     STRIPE_SK: 'sk_test_MuXTw0n0AC1SKlvCMj68b1kp',
     SENDGRID_API_KEY: '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',
-    //  MONGO_URI: 'mongodb://admin:botinty123@ds041671.mlab.com:41671/addodabooking-db'
 }
   
   

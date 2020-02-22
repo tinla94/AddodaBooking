@@ -4,6 +4,9 @@ const Booking = require('../models/booking.model');
 const keys = require("../config/keys");
 const { profileImageUpload } = require('../services/aws/image-upload');
 const normalizeErrors = require('../helpers/mongoose-error');
+// import aws
+const { singleImageUpload } = require('../services/aws/image-upload');
+const avatarUpload = singleImageUpload.single('avatarUpload');
 
 
 
@@ -100,44 +103,6 @@ exports.deleteUser = async (req, res) => {
   };
 }
 
-// Profile Image Upload
-exports.uploadProfileImage = (req, res) => {
-  try {
-    profileImageUpload(req, res, (err) => {
-      // check error
-      if (err) {
-        return res.status(400).send({
-          errors: err
-        });
-      }
-
-      // if file not found
-      if (req.file === undefined) {
-        return res.status(400).json({
-          errors: [{
-            title: 'Something wrong...',
-            detail: 'No File is being selected'
-          }]
-        });
-      }
-
-      // return image
-      return res.status(200).json({
-        'Image Key': req.file.key,
-        'Image Location': req.file.location
-      });
-    });
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).send({
-      errors: [{
-        title: 'Something wrong...',
-        detail: 'Oops! Internal Server Error'
-      }]
-    });
-  };
-}
-
 // Find user's bookings
 exports.getUserBookings = async (req, res) => {
   try {
@@ -172,4 +137,31 @@ exports.getUserRentals = async (req, res) => {
       }]
     });
   };
+}
+
+// User avatar upload
+exports.avatarUpload = (req, res) => {
+  try {
+    avatarUpload(req, res, (err) => {
+      if (err) {
+        return res.status(403).json({
+          errors: [{
+            title: 'Image Upload Error',
+            detail: err.message
+          }]
+        })
+      }
+
+      // return avatar
+      return res.json({ 'avatarUrl': req.file.location });
+    });
+  } catch (e) {
+    console.error(err.message);
+    return res.status(500).send({
+      errors: [{
+        title: 'Something wrong...',
+        detail: 'Oops! Internal Server Error'
+      }]
+    });
+  }
 }

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getUser, updateUser, deleteUser, getUserRentals, getUserBookings, uploadProfileImage } = require('../controllers/user.controller');
+const { getUser, updateUser, deleteUser, getUserRentals, getUserBookings, avatarUpload} = require('../controllers/user.controller');
 const requireLogin = require('../middlewares/requireLogin');
 
 
@@ -21,22 +21,22 @@ router.get('/rentals-manage', requireLogin, getUserRentals);
 router.get('/bookings-manage', requireLogin, getUserBookings);
 
 
-// @route   Patch api/users/user-profile/edit
+// @route   Patch api/users/profile/edit
 // @desc    Edit user info
 // @access  Private
 router.patch('/profile/edit', requireLogin, updateUser);
 
 
-// @route   Patch api/users/user-profile/delete
+// @route   Patch api/users/profile/delete
 // @desc    Delete user info
 // @access  Private
 router.delete('/profile/delete', requireLogin, deleteUser);
 
 
-// @route   POST api/users/image-upload
+// @route   POST api/users/profile/image-upload
 // @desc    Upload user image
 // @access  Private
-router.post( '/image-upload', requireLogin, uploadProfileImage);
+router.post( '/profile/avatar-upload', requireLogin, avatarUpload);
 
 
 module.exports = router;
