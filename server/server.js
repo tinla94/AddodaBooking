@@ -1,5 +1,7 @@
 // import db
 require('./db/mongoose');
+// import cache
+require('./services/cache');
 // packages
 const express = require('express');
 const mongoose = require('mongoose');

@@ -2,7 +2,6 @@ const User = require("../models/user.model");
 const Rental = require("../models/rental.model");
 const Booking = require('../models/booking.model');
 const keys = require("../config/keys");
-const { profileImageUpload } = require('../services/aws/image-upload');
 const normalizeErrors = require('../helpers/mongoose-error');
 // import aws
 const { singleImageUpload } = require('../services/aws/image-upload');
@@ -124,7 +123,7 @@ exports.getUserBookings = async (req, res) => {
 // Find user's rentals
 exports.getUserRentals = async (req, res) => {
   try {
-    const foundRentals = await Rental.where({ user: req.user.id });
+    const foundRentals = await Rental.find({ user: req.user.id }).cache({ time: 10 });
 
     // return rentals
     return res.status(200).json(foundRentals);

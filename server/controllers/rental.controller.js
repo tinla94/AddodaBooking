@@ -1,7 +1,10 @@
-const User = require('../models/user.model')
-const Rental = require('../models/rental.model');
+const mongoose = require("mongoose");
+const User = mongoose.model("User");
+const Rental = mongoose.model("Rental");
 const { validationResult } = require('express-validator');
 const { normalizeErrors } = require('../helpers/mongoose-error');
+// redis clear cache
+const { clearKey } = require('../services/cache');
 // importing aws 
 const { singleImageUpload } = require('../services/aws/image-upload');
 const hotelImageUpload = singleImageUpload.single('hotelImage');
@@ -54,6 +57,8 @@ exports.createRental = async (req, res) => {
 
         // save rental
         await rental.save();
+        // clear cache
+        clearKey(Rental.collection.collectionName);
         res.status(201).json(rental);
     } catch (err) {
         console.log(err.message)
@@ -163,21 +168,15 @@ exports.deleteRental = async (req, res) => {
     };
 }
 
+
 // Get all rentals
 exports.getAllRentals = async (req, res) => {
     try {
-        const rentals = await Rental.find({}).select('-booking');
-
-        // if no rentals 
-        // return error
-        if (rentals.length === 0) {
-            return res.status(400).json({
-                errors: [{
-                    title: 'Something wrong...',
-                    detail: 'No rentals found'
-                }]
+        const rentals = await Rental
+            .find()
+            .cache({
+                time: 10
             });
-        };
 
         // return all rentals
         return res.status(200).json(rentals);
@@ -191,6 +190,7 @@ exports.getAllRentals = async (req, res) => {
         });
     };
 }
+
 
 // Get a rental info
 exports.getRental = async (req, res) => {
