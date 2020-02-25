@@ -21,3 +21,4 @@ package-lock.json
 # keys
 server/config/dev.js
 server/config/ci.js
+server/config/keys_test.js

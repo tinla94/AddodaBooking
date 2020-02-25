@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { RentalManageCard } from './RentalManageCard';
 import { RentalManageModal } from './RentalManageModal';
 import { ToastContainer, toast } from 'react-toastify';
-import { Roll } from 'react-reveal';
+
 
 export class RentalManage extends React.Component {
   // state

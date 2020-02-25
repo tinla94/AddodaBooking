@@ -4,6 +4,8 @@ import { FormInput } from '../../../utils/form/FormInput';
 import { FormSelect } from '../../../utils/form/FormSelect';
 import { FormTextArea } from '../../../utils/form/FormTextArea';
 import { FormFileUpload } from '../../../utils/form/FormFileUpload';
+import { FormFileUpload2 } from '../../../utils/form/FormFileUpload2';
+import { FormUpload3 } from '../../../utils/form/FormUpload3';
 import { FormError } from '../../../utils/form/FormError';
 
 
@@ -27,9 +29,9 @@ const RentalCreateForm = props => {
         component={FormTextArea}
       />
       <Field
-        name="street"
+        name="address"
         type="text"
-        label='Street'
+        label='Address'
         className='bwm-form__input'
         component={FormInput}
       />

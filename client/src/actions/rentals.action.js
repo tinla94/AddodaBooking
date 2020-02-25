@@ -12,7 +12,7 @@ import {
     UPDATE_RENTAL_FAIL,
     RESET_RENTAL_ERRORS
 } from './types';
-import authService from '../services/auth-service';
+
 
 // define axios
 const axiosInstance = axiosService.getInstance();
@@ -121,4 +121,16 @@ export const resetRentalErrors = () => {
     return {
       type: RESET_RENTAL_ERRORS
     }
+}
+
+// upload rental image
+export const rentalImageUpload = image => {
+    const formData = new FormData();
+    formData.append('rentalImage', image);
+  
+    return axiosInstance.post('/rentals/rental-image-upload', formData)
+      .then(json => {
+        return json.data.rentalImageUrl;
+      })
+      .catch(({response}) => Promise.reject(response.data.errors[0]))
   }

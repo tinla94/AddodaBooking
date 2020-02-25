@@ -6,9 +6,9 @@ import { getRangeOfDates } from 'helpers';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payment from '../payment/Payment';
+import { createBooking } from '../../actions/bookings-payments.action';
+import moment from 'moment';
 
-import * as moment from 'moment';
-import * as actions from 'actions';
 
 
 
@@ -131,7 +131,7 @@ class Booking extends React.Component {
   }
 
   reserveRental() {
-    actions.createBooking(this.state.proposedBooking).then(
+    createBooking(this.state.proposedBooking).then(
       (booking) => {
         this.addNewBookedOutDates(booking);
         this.cancelConfirmation();

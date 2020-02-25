@@ -20,7 +20,7 @@ I built a Full-stack Application, using MERN Stack (MongoDB, Express, React, Nod
 
 4. **Redis**: an open-source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, and geospatial indexes with radius queries.
 
-5. **Socket.IO**: a JavaScript library for real-time web applications. It enables real-time, bi-directional communication between web clients and servers.
+5. **PM2**: a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
 
 ## Front-End

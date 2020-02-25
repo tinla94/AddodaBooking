@@ -1,5 +1,4 @@
 import axiosService from '../services/axios-service';
-import authService from '../services/auth-service';
 import {
   FETCH_USER_BOOKINGS_INIT,
   FETCH_USER_BOOKINGS_SUCCESS,
@@ -35,28 +34,36 @@ export const fetchUserBookings = () => {
     dispatch(fetchUserBookingsInit());
 
     axiosInstance.get('/bookings/manage')
-      .then(res => res.data )
+      .then(res => res.data)
       .then(userBookings => dispatch(fetchUserBookingsSuccess(userBookings)))
-      .catch(({response}) => dispatch(fetchUserBookingsFail(response.data.errors)))
+      .catch(({ response }) => dispatch(fetchUserBookingsFail(response.data.errors)))
   }
 }
+
+// create bookings
+export const createBooking = (booking) => {
+  return axiosInstance.post('/bookings', booking)
+    .then(res => res.data)
+    .catch(({ response }) => Promise.reject(response.data.errors))
+}
+
 
 
 // Payments
 export const getPendingPayments = () => {
-    return axiosInstance.get('/payments/pending')
-      .then(res => res.data)
-      .catch(({response}) => Promise.reject(response.data.errors))
-  }
-  
-  export const acceptPayment = (payment) => {
-    return axiosInstance.post('/payments/accept', payment)
-      .then(res => res.data)
-      .catch(({response}) => Promise.reject(response.data.errors))
-  }
-  
-  export const declinePayment = (payment) => {
-    return axiosInstance.post('/payments/decline', payment)
-      .then(res => res.data)
-      .catch(({response}) => Promise.reject(response.data.errors))
-  }
+  return axiosInstance.get('/payments/pending')
+    .then(res => res.data)
+    .catch(({ response }) => Promise.reject(response.data.errors))
+}
+
+export const acceptPayment = (payment) => {
+  return axiosInstance.post('/payments/accept', payment)
+    .then(res => res.data)
+    .catch(({ response }) => Promise.reject(response.data.errors))
+}
+
+export const declinePayment = (payment) => {
+  return axiosInstance.post('/payments/decline', payment)
+    .then(res => res.data)
+    .catch(({ response }) => Promise.reject(response.data.errors))
+}

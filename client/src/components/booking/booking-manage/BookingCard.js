@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { pretifyDate, toUpperCase } from 'helpers';
-import { Fade } from 'react-reveal';
 
 export function BookingCard(props) {
 

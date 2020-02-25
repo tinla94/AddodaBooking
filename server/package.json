@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node --exec babel-node ./bin/www",
-    "server": "nodemon --exec babel-node ./bin/www"
+    "server": "nodemon --exec babel-node ./bin/www --ignore ../client/"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "http-errors": "^1.7.3",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
+    "mongodb-memory-server": "^6.2.4",
     "mongoose": "^5.9.2",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
@@ -40,6 +41,7 @@
     "@babel/node": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
     "@babel/register": "^7.8.3",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
   }
 }

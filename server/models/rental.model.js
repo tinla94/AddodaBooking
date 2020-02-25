@@ -27,10 +27,10 @@ const rentalSchema = new Schema({
     required: true, 
     lowercase: true 
   },
-  images: [{ 
+  image: { 
     type: String, 
     required: true 
-  }],
+  },
   bedrooms: {
     type: Number,
     default: 0,

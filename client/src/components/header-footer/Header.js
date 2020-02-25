@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import authService from '../../services/auth-service';
+
 
 
 class Header extends React.Component {

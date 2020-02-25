@@ -25,7 +25,6 @@ const authRoutes = require('./routes/auth.route'),
     paymentRoutes = require('./routes/payment.route');
 
 
-
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,6 +42,7 @@ app.use('/api/rentals', rentalRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
+
 
 // Production build
 if (['production', 'ci'].includes(process.env.NODE_ENV)) {

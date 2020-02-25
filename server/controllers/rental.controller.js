@@ -7,7 +7,7 @@ const { normalizeErrors } = require('../helpers/mongoose-error');
 const { clearKey } = require('../services/cache');
 // importing aws 
 const { singleImageUpload } = require('../services/aws/image-upload');
-const hotelImageUpload = singleImageUpload.single('hotelImage');
+const hotelImageUpload = singleImageUpload.single('rentalImage');
 
 
 // Check rental owner
@@ -221,7 +221,7 @@ exports.getRental = async (req, res) => {
 
 
 // Upload rental image
-exports.hotelImageUpload = (req, res) => {
+exports.rentalImageUpload = (req, res) => {
     hotelImageUpload(req, res, (err) => {
         if(err) {
             return res.status(400).json({
@@ -233,7 +233,7 @@ exports.hotelImageUpload = (req, res) => {
         }
 
         // add image
-        return res.json({ 'hotelImageUrl': req.file.location });
+        return res.json({ 'rentalImageUrl': req.file.location });
     });
 };
 

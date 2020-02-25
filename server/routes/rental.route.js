@@ -9,7 +9,7 @@ const {
   updateRental, 
   deleteRental, 
   checkRentalOwner,
-  hotelImageUpload
+  rentalImageUpload
 } = require('../controllers/rental.controller');
 
 
@@ -39,11 +39,10 @@ router.post('/create', [
   ]
 ], createRental);
 
-
 // @route   POST api/rentals/image-upload
 // @desc    Add image for rental
 // @access  Private
-router.post('/image-upload', requireLogin, hotelImageUpload);
+router.post('/rental-image-upload', requireLogin, rentalImageUpload);
 
 
 // @route   PATCH api/rentals/edit/:id

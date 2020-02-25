@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactCrop, { makeAspectCrop } from 'react-image-crop';
 import { toast } from 'react-toastify';
-import * as actions from 'actions';
+import { rentalImageUpload } from '../../actions/rentals.action';
 
 
 export class FormFileUpload extends React.Component {
@@ -113,12 +113,18 @@ export class FormFileUpload extends React.Component {
   }
 
   uploadImage() {
-    const { croppedImage } = this.state;
+    const { croppedImage, selectedFile } = this.state;
 
-    if (croppedImage) {
-
+    if (selectedFile) {
       this.setState({ pending: true, status: 'INIT' });
-      actions.uploadImage(croppedImage).then(
+      rentalImageUpload(selectedFile)
+        .then(
+        (uploadedImage) => { this.onSuccess(uploadedImage) },
+        (error) => { this.onError(error) })
+    } else {
+      this.setState({ pending: true, status: 'INIT' });
+      rentalImageUpload(croppedImage)
+        .then(
         (uploadedImage) => { this.onSuccess(uploadedImage) },
         (error) => { this.onError(error) })
     }
@@ -150,7 +156,7 @@ export class FormFileUpload extends React.Component {
   }
 
   render() {
-    const { selectedFile, imageBase64, crop, initialImageBase64 } = this.state;
+    const { selectedFile, crop, initialImageBase64 } = this.state;
 
     return (
       <div className='img-upload-container'>
@@ -162,7 +168,7 @@ export class FormFileUpload extends React.Component {
             <span style={{ marginLeft: '5px' }}>Upload an image</span>
           </p>
           <input type='file'
-            accept='.jpg, .png, .jpeg'
+            accept='.jpg, .png, .jpeg, .gif '
             onChange={this.onChange} />
         </label>
         <br />
@@ -178,21 +184,16 @@ export class FormFileUpload extends React.Component {
         }
 
         {initialImageBase64 &&
+          <div>
           <ReactCrop src={initialImageBase64}
             crop={crop}
             onChange={(crop) => this.onCropChange(crop)}
             onImageLoaded={(image) => this.onImageLoaded(image)}
             onComplete={(crop, pixelCrop) => this.onCropCompleted(crop, pixelCrop)} />
-        }
+          {this.renderSpinningCircle()}
 
-        {imageBase64 &&
-          <div className='img-preview-container'>
-            <div className='img-preview'
-              style={{ 'backgroundImage': 'url(' + imageBase64 + ')' }}>
-            </div>
-
-            {this.renderSpinningCircle()}
           </div>
+
         }
 
         {this.renderImageStatus()}
@@ -228,7 +229,7 @@ function getCroppedImg(image, pixelCrop, fileName) {
     canvas.toBlob(file => {
       file.name = fileName;
       resolve(file);
-    }, 'image/jpeg');
+    }, 'image/jpeg/png/jpg');
   });
 }
 
