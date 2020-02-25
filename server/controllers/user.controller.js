@@ -141,7 +141,7 @@ exports.getUserRentals = async (req, res) => {
 // User avatar upload
 exports.avatarUpload = (req, res) => {
   try {
-    avatarUpload(req, res, (err) => {
+    avatarUpload(req, res, async (err) => {
       if (err) {
         return res.status(403).json({
           errors: [{
@@ -151,8 +151,13 @@ exports.avatarUpload = (req, res) => {
         })
       }
 
+      const user = await User.findById(req.user.id);
+      user.avatar = req.file.location;
+      
+      await user.save();
+
       // return avatar
-      return res.json({ 'avatarUrl': req.file.location });
+      return res.status(200).json( user );
     });
   } catch (e) {
     console.error(err.message);

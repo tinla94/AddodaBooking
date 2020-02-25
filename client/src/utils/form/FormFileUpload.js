@@ -167,7 +167,8 @@ export class FormFileUpload extends React.Component {
             </span> 
             <span style={{ marginLeft: '5px' }}>Upload an image</span>
           </p>
-          <input type='file'
+          <input 
+            type='file'
             accept='.jpg, .png, .jpeg, .gif '
             onChange={this.onChange} />
         </label>

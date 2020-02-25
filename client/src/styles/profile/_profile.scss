@@ -15,9 +15,13 @@
         align-items: center;
         flex-direction: column;
 
-        img {
-            width: 50%;
-            margin-bottom: 1rem;
+        &-container {
+            img {
+                width: 50%;
+                margin-bottom: 1rem;
+                border: 2px solid $dark-gray-color;
+                border-radius: 5px;
+            }
         }
 
         .button-link {

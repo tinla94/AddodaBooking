@@ -39,3 +39,15 @@ export const getUserRentals = () => {
     )
 }
 
+
+// Upload user avatar
+export const uploadUserAvatar = image => {
+    const formData = new FormData();
+    formData.append('avatarUpload', image);
+
+    return axiosInstance.post('/users/profile/avatar-upload', formData)
+    .then(json => {
+      return json.data;
+    })
+    .catch(({response}) => Promise.reject(response.data.errors[0]))
+}

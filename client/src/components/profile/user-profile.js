@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getUser } from '../../actions/user.action';
 import CenterLayout from '../../utils/layout/Center-Layout';
 import UserDefaultPicture from '../../images/user-profile-icon.png';
+import { ProfileAvatarUpload } from './user-profile-image';
 
 
 class UserProfile extends React.Component {
@@ -39,13 +40,13 @@ class UserProfile extends React.Component {
 
         return (
             <div className="profile-avatar">
-                <img src={
-                    user.avatar === '' ? UserDefaultPicture : user.avatar
-                } alt="user-avatar" />
-                <button
-                    className="btn btn-link"
-
-                >Change avatar</button>
+                <div className="profile-avatar-container">
+                    <img
+                        src={user.avatar === '' ? UserDefaultPicture : user.avatar}
+                        alt="user-avatar"
+                    />
+                </div>
+                <ProfileAvatarUpload />
             </div>
         )
     }
