@@ -9,6 +9,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // Header/Footer components
 import Header from 'components/header-footer/Header';
+import Header2 from 'components/header-footer/Header2';
 
 // Rental components
 import RentalListing from 'components/rental/rental-listing/rental-listing';
@@ -64,7 +65,7 @@ class App extends Component {
           <BrowserRouter>
             <div className='App'>
               <ToastContainer />
-              <Header logout={this.logout} />
+              <Header2 logout={this.logout} />
               {/* CSS transition page */}
               <Route render={({ location }) => (
                 <TransitionGroup>

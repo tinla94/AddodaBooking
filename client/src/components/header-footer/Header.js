@@ -18,8 +18,8 @@ class Header extends React.Component {
   renderAuthButtons(isAuth) {
     if (isAuth) {
       return <li>
-        <span 
-          className='nav-item nav-link clickable' 
+        <span
+          className='nav-item nav-link clickable'
           onClick={this.handleLogout}>
           Sign Out
         </span>
@@ -29,15 +29,15 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         <li>
-          <Link 
-            className='nav-item nav-link' 
+          <Link
+            className='nav-item nav-link'
             to='/auth/login'>
             Sign In
           </Link>
         </li>
         <li>
-          <Link 
-            className='nav-item nav-link' 
+          <Link
+            className='nav-item nav-link'
             to='/auth/register'>
             Register
           </Link>
