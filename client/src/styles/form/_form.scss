@@ -2,10 +2,10 @@
   color: $dark-gray-color;
 
   &-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
     font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 3rem;
+    color: $main-black-color;
   }
 
   &__input::before,
@@ -13,7 +13,7 @@
   &__input {
     width: 90%;
     border: none;
-    border-bottom: 2px solid $main-black-color;
+    border-bottom: 2px solid $light-gray-color;
     margin-bottom: 1rem;
     outline: none;
     transition: all 0.3s;

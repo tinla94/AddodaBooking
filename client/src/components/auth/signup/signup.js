@@ -19,8 +19,8 @@ export class Register extends React.Component {
   registerUser(userData) {
     // register user
     register(userData).then(
-      registered => this.setState({redirect: true}),
-      errors => this.setState({errors})
+      registered => this.setState({ redirect: true }),
+      errors => this.setState({ errors })
     );
   }
 
@@ -28,21 +28,24 @@ export class Register extends React.Component {
     const { errors, redirect } = this.state;
 
     if (redirect) {
-      return <Redirect to={{pathname: '/auth/login', state: { successRegister: true }}} />
+      return <Redirect to={{ pathname: '/auth/login', state: { successRegister: true } }} />
     }
 
     return (
-      <section id='register' className="page-layout-auth">
+      <section
+        id='register'
+        className="page-layout-auth">
         <div className='bwm-form'>
           <div className='row'>
             <div className='col-md-5'>
-                <h1 className="bwm-form-title">Sign Up</h1>
+              <h1 className="bwm-form-title">Sign Up</h1>
+              <hr style={{ marginBottom: '2rem' }} />
               <RegisterForm submitCb={this.registerUser} errors={errors} />
             </div>
             <div className='col-md-6 ml-auto'>
               <div className='image-container'>
                 <h2 className='catchphrase'>As our member you have access to most awesome places around the world.</h2>
-                <img src={process.env.PUBLIC_URL + '/img/register-image.jpg'} alt=""/>
+                <img src={process.env.PUBLIC_URL + '/img/register-image.jpg'} alt="" />
               </div>
             </div>
           </div>

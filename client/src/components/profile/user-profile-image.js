@@ -48,6 +48,7 @@ export class ProfileAvatarUpload extends Component {
 
     render() {
         const { message, showModal, file } = this.state;
+        console.log(file);
 
         return (
             <React.Fragment>
@@ -71,6 +72,7 @@ export class ProfileAvatarUpload extends Component {
                         />
                     </label>
                     <p>{message}</p>
+                    <p>{file ? file.name : ''}</p>
                     {file ? <form onSubmit={this.uploadFile}>
                         <button
                             className="btn btn-primary"

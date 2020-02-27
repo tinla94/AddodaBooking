@@ -4,6 +4,7 @@ import { RentalList } from './rental-list';
 import RentalSearchInput from '../RentalSearchInput';
 import { connect } from 'react-redux';
 import { getAllRentals } from '../../../actions/rentals.action';
+import { Bounce } from 'react-reveal';
 
 class RentalListing extends React.Component {
 
@@ -17,16 +18,28 @@ class RentalListing extends React.Component {
         <div className="rentalListing-jumbotron">
           <div className="rentalListing-jumbotron__background">
             <div className='rentalListing-jumbotron__intro'>
-              <h2       
-                className="rentalListing-jumbotron__intro-title">
-                TOP RENTAL COMMUNITY
+              <Bounce 
+                bottom 
+                delay={500} 
+                duration={1000}
+                >
+                <h2
+                  className="rentalListing-jumbotron__intro-title">
+                  TOP RENTAL COMMUNITY
               </h2>
-              <h3 
-                className="rentalListing-jumbotron__intro-subtitle">
-                <span>
-                  Start your booking today
+              </Bounce>
+              <Bounce 
+                top 
+                delay={500} 
+                duration={1000}
+                >
+                <h3
+                  className="rentalListing-jumbotron__intro-subtitle">
+                  <span>
+                    Start your booking today
                 </span>
-              </h3>
+                </h3>
+              </Bounce>
             </div>
           </div>
         </div>

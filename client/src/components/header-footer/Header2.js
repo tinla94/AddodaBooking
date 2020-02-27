@@ -52,7 +52,7 @@ class Header2 extends React.Component {
 
 
         return (
-            <Navbar>
+            <Navbar expand="lg">
                 {/* Navbar brand */}
                 <div className="navbar-brand">
                     <Link

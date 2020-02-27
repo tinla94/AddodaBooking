@@ -31,12 +31,14 @@ I built a Full-stack Application, using MERN Stack (MongoDB, Express, React, Nod
 
 6. **Redux**: an open-source JavaScript library for managing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
 
+7. **React-Reveal**: a high performance animation library for React.
+
 
 ## Other Technologies
 
-7. **AWS S3**: a service offered by Amazon Web Services that provides object storage through a web service interface.
+8. **AWS S3**: a service offered by Amazon Web Services that provides object storage through a web service interface.
 
-8. **Google Map API**: a robust tool that can be used to create a custom map, a searchable map, check-in functions, display live data synching with location, plan routes, or create a mashup just to name a few
+9. **Google Map API**: a robust tool that can be used to create a custom map, a searchable map, check-in functions, display live data synching with location, plan routes, or create a mashup just to name a few.
 
 
 # Getting Started
@@ -81,7 +83,7 @@ mongod
 
 2. You can use **MongoAtlas** for virtual database.
 
-Please look at `package.json` file for all dependencies that you will need to install.  For example you will need *parcel-bundler* which can be installed via npm: 
+Please look at `package.json` file for all dependencies that you will need to install.  For example you will need *parcel-bundler* which can be installed via npm.
 
 
 # Heroku and Deployment

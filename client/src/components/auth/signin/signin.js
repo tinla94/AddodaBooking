@@ -30,13 +30,22 @@ class Login extends React.Component {
           <div className="row">
             <div className="col-md-5">
                 <h1 className="bwm-form-title">Sign In</h1>
+                <hr style={{ marginBottom: '2rem' }} />
               {
                 successRegister &&
                   <div className='alert alert-success'>
                     <p> You have been succesfuly registered, please login now. </p>
                   </div>
               }
-              <LoginForm submitCb={this.loginUser} errors={errors}/>
+              <LoginForm 
+                submitCb={this.loginUser} 
+                errors={errors} />
+              <hr />
+              <div className="test-account">
+                <h6>Test account</h6>
+                <p>Email: test@test.com</p>
+                <p>Password: test123</p>
+              </div>
             </div>
             <div className="col-md-6 ml-auto">
               <div className="image-container">

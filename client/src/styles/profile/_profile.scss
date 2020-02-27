@@ -1,8 +1,6 @@
 .profile {
     &-container {
         text-align: center;
-        letter-spacing: 2px;
-        padding: 0 20%;
     }
 
     &-manage-buttons {
@@ -17,10 +15,11 @@
 
         &-container {
             img {
-                width: 50%;
+                width: 200px;
+                height: 200px;
                 margin-bottom: 1rem;
-                border: 2px solid $dark-gray-color;
-                border-radius: 5px;
+                border: 5px solid $light-gray-color;
+                border-radius: 50%;
             }
         }
 

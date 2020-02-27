@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { getUser } from '../../actions/user.action';
 import CenterLayout from '../../utils/layout/Center-Layout';
 import UserDefaultPicture from '../../images/user-profile-icon.png';
@@ -53,6 +54,7 @@ class UserProfile extends React.Component {
 
     render() {
         const { user } = this.state;
+        console.log(user);
 
         return (
             <CenterLayout>
@@ -60,8 +62,10 @@ class UserProfile extends React.Component {
                     <div className="profile-container">
                         {this.renderUserAvatar()}
                         <hr />
-                        <h2>{user.firstname} {user.lastname}</h2>
-                        <h6>Joined on {user.joined}</h6>
+                        <h1>{user.firstname} {user.lastname}</h1>
+                        <p>From {user.country ? user.country : 'United State'}</p>
+                        <h5>Joined on {moment(user.joined).format('MMMM Do YYYY')}</h5>
+
                         {/* Buttons */}
                         {this.renderMangeButtons()}
                     </div>

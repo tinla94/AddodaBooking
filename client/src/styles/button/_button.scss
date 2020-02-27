@@ -1,10 +1,8 @@
 .button {
     padding: .5rem 2.5rem;
     border-radius: 3px;
-    box-shadow: .1rem 3px .4rem rgba($main-black-color, 0.5);
     color: white;
     cursor: pointer;
-    letter-spacing: 2px;
     transition: all .3s;
     text-decoration: none;
 
@@ -14,7 +12,7 @@
     }
 
     &:hover {
-        transform: translateY(-4px);
+        transform: scale(1.1);
     }
 
     &:active,
@@ -40,7 +38,7 @@
 
     &-gray:hover {
         background: $light-gray-color;
-        color: white;
+        color: $main-white-color;
     }
 
     &-dark-gray {
@@ -49,7 +47,7 @@
 
     &-dark-gray:hover {
         background: $main-black-color;
-        color: white;
+        color: $main-white-color;
     }
 
     &-manage {
