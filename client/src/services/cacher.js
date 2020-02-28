@@ -1,5 +1,3 @@
-import * as camelCase from 'camel-case';
-
 let instance = null;
 
 export class Cacher {
@@ -19,11 +17,11 @@ export class Cacher {
   }
 
   cacheValue(key, value) {
-    this.cache[camelCase(key)] = value;
+    this.cache[key] = value;
   }
 
   getCachedValue(key) {
-    return this.cache[camelCase(key)];
+    return this.cache[key];
   }
 
 }

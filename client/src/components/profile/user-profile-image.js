@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ModalLayout from '../../utils/layout/Modal-Layout';
-import { Modal } from 'react-bootstrap';
 import { uploadUserAvatar } from '../../actions/user.action';
 
 

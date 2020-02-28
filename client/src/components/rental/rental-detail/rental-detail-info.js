@@ -9,7 +9,7 @@ export function RentalDetailInfo(props) {
   return (
       <div className='rental'>
           <h1 className='rental-title'>{rental.title}</h1>
-          <h2 className='rental-country'>{rental.city}, {rental.country}</h2>
+          <h2 className='rental-country'>- {rental.city}, {rental.country}</h2>
           <hr />
           <h2 className={`rental-type ${rental.category}`}>{rentalType(rental.shared)} {rental.category} - <span className="rental-type__host">hosted by {rental.user.firstname}</span></h2> 
         <div className='rental-room-info'>

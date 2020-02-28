@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { RentalDetailInfo } from './rental-detail-info';
+import RentalMap from './rental-map';
 import Booking from 'components/booking/Booking';
 import DisqusThread from '../../../services/disqus-thread';
-
 import { getRentalById } from '../../../actions/rentals.action';
 import { Fade } from 'react-reveal';
 
@@ -17,22 +17,23 @@ class RentalDetail extends React.Component {
   }
   render() {
     const { rental } = this.props;
+    console.log(rental);
 
     if (rental._id) {
       return (
         <section id='rentalDetails' className="page-layout-two">
           <div className='upper-section'>
             <div className='row'>
-              <div className='col-md-6'>
+              <div className='col-md-8'>
                 <Fade top duration={1100} delay={200}>
                   <img src={rental.image} alt=''></img>
                 </Fade>
               </div>
-              {/* <div className='col-md-6'>
+              <div className='col-md-4'>
                 <Fade right duration={1100} delay={200}>
-                  <RentalMap location={`${rental.city}, ${rental.street}`} />
+                  <RentalMap location={`${rental.city}, ${rental.address}`} />
                 </Fade>
-              </div> */}
+              </div>
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter, NavLink } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Navbar, Nav } from 'react-bootstrap';
 
@@ -29,19 +29,21 @@ class Header2 extends React.Component {
 
         return (
             <React.Fragment>
-                <Nav.Link>
-                    <NavLink
-                        className='nav-link'
-                        to='/auth/login'>
-                        Sign In
-                    </NavLink>
+                <Nav.Link
+                    as={NavLink}
+                    eventKey="3"
+                    activeClassName='active-link'
+                    to="/auth/login"
+                >
+                    Sign In
                 </Nav.Link>
-                <Nav.Link>
-                    <NavLink
-                        className='nav-link'
-                        to='/auth/register'>
-                        Register
-                    </NavLink>
+                <Nav.Link
+                    as={NavLink}
+                    eventKey="1"
+                    activeClassName='active-link'
+                    to="/auth/register"
+                >
+                    Register
                 </Nav.Link>
             </React.Fragment>
         )
@@ -52,43 +54,47 @@ class Header2 extends React.Component {
 
 
         return (
-            <Navbar expand="lg">
+            <Navbar
+                collapseOnSelect
+                expand="lg"
+            >
                 {/* Navbar brand */}
                 <div className="navbar-brand">
-                    <Link
-                        className='header-brand'
-                        to='/rentals'>
+                    <h2
+                        className='header-brand'>
                         <span className="header-brand_Logo">OvernightBooking</span>
-                    </Link>
+                    </h2>
                 </div>
                 {/* Navbar toggle button on mobile */}
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle
+                    aria-controls="responsive-navbar-nav" />
                 {/* Navbar links */}
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link>
-                            <NavLink
-                                activeClassName='active-link'
-                                className='nav-item nav-link'
-                                to='/'>Home
-                            </NavLink>
+                        <Nav.Link
+                            as={NavLink}
+                            eventKey="1"
+                            activeClassName='active-link'
+                            to="/"
+                        >
+                            Home
                         </Nav.Link>
-                        <Nav.Link>
-                            <NavLink
-                                activeClassName='active-link'
-                                className='nav-item nav-link'
-                                to='/contact-us'>
-                                Contact Us
-                            </NavLink>
+                        <Nav.Link
+                            as={NavLink}
+                            eventKey="1"
+                            activeClassName='active-link'
+                            to="/contact-us"
+                        >
+                            Contact Us
                         </Nav.Link>
                         {isAuth &&
-                            <Nav.Link>
-                                <NavLink
-                                    activeClassName='active-link'
-                                    className='nav-item nav-link'
-                                    to='/user/account'>
-                                    Profile
-                             </NavLink>
+                            <Nav.Link
+                                as={NavLink}
+                                eventKey="5"
+                                activeClassName='active-link'
+                                to='/user/account'
+                            >
+                                Profile
                             </Nav.Link>
                         }
                         {this.renderAuthButtons(isAuth)}

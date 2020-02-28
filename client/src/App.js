@@ -8,7 +8,6 @@ import { ToastContainer } from 'react-toastify';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // Header/Footer components
-import Header from 'components/header-footer/Header';
 import Header2 from 'components/header-footer/Header2';
 
 // Rental components

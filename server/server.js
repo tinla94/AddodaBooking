@@ -11,6 +11,8 @@ const flash = require('connect-flash');
 const path = require('path');
 const passport = require('passport');
 const { createError } = require('http-errors');
+const cors = require('cors');
+
 
 // keys
 const keys = require('./config/keys');
@@ -19,10 +21,10 @@ const app = express();
 
 // import routes
 const authRoutes = require('./routes/auth.route'),
-    rentalRoutes = require('./routes/rental.route'),
-    userRoutes = require('./routes/user.route'),
-    bookingRoutes = require('./routes/booking.route'),
-    paymentRoutes = require('./routes/payment.route');
+  rentalRoutes = require('./routes/rental.route'),
+  userRoutes = require('./routes/user.route'),
+  bookingRoutes = require('./routes/booking.route'),
+  paymentRoutes = require('./routes/payment.route');
 
 
 // Middleware
@@ -43,14 +45,26 @@ app.use('/api/users', userRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
 
+// CORS
+app.use('*', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+
+app.options('*', cors());
+
+
 
 // Production build
 if (['production', 'ci'].includes(process.env.NODE_ENV)) {
-    app.use(express.static('client/build'));
-  
-    app.get('*', function(req, res) {
-      res.sendFile(path.resolve('client', 'build', 'index.html'));
-    });
+  app.use(express.static('client/build'));
+
+  app.get('*', function (req, res) {
+    res.sendFile(path.resolve('client', 'build', 'index.html'));
+  });
 }
 
 // catch 404 and forward to error handler

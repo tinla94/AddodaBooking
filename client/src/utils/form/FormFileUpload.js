@@ -163,7 +163,7 @@ export class FormFileUpload extends React.Component {
         <label className='img-upload' style={{ margin: '1rem 0' }}>
           <p>         
             <span className="button button-gray">
-              <i class="fas fa-file-image"></i>
+              <i className="fas fa-file-image"></i>
             </span> 
             <span style={{ marginLeft: '5px' }}>Upload an image</span>
           </p>

@@ -3,4 +3,5 @@ module.exports = {
     API_DEVELOPMENT: process.env.API_DEVELOPMENT,
     DOMAIN_DEVELOPMENT: process.env.DOMAIN_DEVELOPMENT,
     DOMAIN_PRODUCTION: process.env.DOMAIN_PRODUCTION,
+    GOOGLE_MAP_API: process.env.GOOGLE_MAP_API
 }

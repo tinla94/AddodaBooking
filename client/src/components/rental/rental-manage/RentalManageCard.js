@@ -1,9 +1,11 @@
 import React from 'react';
-import { toUpperCase, pretifyDate } from 'helpers';
+import { toUpperCase, pretifyDate, pretifyTime } from '../../../helpers';
 import { Link } from 'react-router-dom';
 
-export class RentalManageCard extends React.Component {
 
+
+
+export class RentalManageCard extends React.Component {
   constructor() {
     super();
 
@@ -25,7 +27,7 @@ export class RentalManageCard extends React.Component {
   }
 
   deleteRental(rentalId, rentalIndex) {
-    this.setState({wantDelete: false});
+    this.setState({ wantDelete: false });
 
     this.props.deleteRentalCb(rentalId, rentalIndex);
   }
@@ -41,23 +43,42 @@ export class RentalManageCard extends React.Component {
       <div className='col-md-4'>
         <div className={`card text-center ${deleteClass}`}>
           <div className='card-block'>
-            <h4 className='card-title'>{rental.title} - {toUpperCase(rental.city)}</h4>
-            <Link className='btn btn-bwm' to={`/rentals/${rental._id}`}>Go to Rental</Link>
-            { rental.bookings && rental.bookings.length > 0 && modal }
+            <h2 className='card-title'>{rental.title}</h2>
+            <p style={{ color: 'gray' }}>---{toUpperCase(rental.city)}---</p>
+            <hr />
+            <Link
+              className='btn btn-link'
+              to={`/rentals/${rental._id}`}>Go to Rental</Link>
+            {rental.bookings && rental.bookings.length > 0 && modal}
           </div>
           <div className='card-footer text-muted'>
-            Created at {pretifyDate(rental.createdAt)}
-            { !wantDelete &&
+            Created on {pretifyDate(rental.createdAt)}
+            <br />
+            At {pretifyTime(rental.createdAt)}
+            <br />
+            {!wantDelete &&
               <React.Fragment>
-                <button onClick={() => { this.showDeleteMenu() }} className='btn btn-danger'> Delete </button>
-                <Link className='btn btn-warning' to={{pathname: `/rentals/${rental._id}/edit`, state: { isUpdate: true }}}> Edit </Link>
+                <Link
+                  className='btn btn-link'
+                  to={{ pathname: `/rentals/${rental._id}/edit`, state: { isUpdate: true } }}
+                  style={{ color: 'orange' }}
+                > Edit </Link>
+                <button
+                  onClick={() => { this.showDeleteMenu() }}
+                  className='btn btn-link'
+                  style={{ color: 'red', textDecoration: 'none' }}
+                > Delete </button>
               </React.Fragment>
             }
-            { wantDelete &&
+            {wantDelete &&
               <div className='delete-menu'>
                 Do you confirm?
-                <button onClick={() => {this.deleteRental(rental._id, rentalIndex)}} className='btn btn-danger'> Yes </button>
-                <button onClick={() => { this.closeDeleteMenu() }} className='btn btn-success'> No </button>
+                <br />
+                <div style={{ marginTop: '5px' }}>
+                  <button
+                    onClick={() => { this.deleteRental(rental._id, rentalIndex) }} className='btn btn-success'> Yes </button>
+                  <button onClick={() => { this.closeDeleteMenu() }} className='btn btn-danger'> No </button>
+                </div>
               </div>
             }
           </div>

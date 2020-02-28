@@ -1,6 +1,5 @@
 import React from 'react';
-import { Cacher } from 'services/cacher';
-
+import { Cacher } from '../../services/cacher';
 import {
   withScriptjs,
   withGoogleMap,
@@ -10,7 +9,7 @@ import {
 } from "react-google-maps";
 
 function MapComponent(props) {
-  const {coordinates, isError, isLocationLoaded} = props;
+  const { coordinates, isError, isLocationLoaded } = props;
 
   return (
       <GoogleMap
@@ -21,11 +20,11 @@ function MapComponent(props) {
       >
       {isLocationLoaded && !isError && <Circle center={coordinates} radius={500} />}
       {isLocationLoaded && isError &&
-       <InfoWindow position={coordinates} options={{maxWidth: 300}}>
+       <InfoWindow position={coordinates} options={{maxWidth: 200}}>
         <div>
           Uuuuups, there is problem to find location on the map, we are trying to resolve
           problem as fast as possible. Contact host for additional informations if you are
-          still interested in booking this place. We are sorry for incoviniance.
+          still interested in booking this place. We are sorry for inconvinience.
         </div>
       </InfoWindow>}
     </GoogleMap>

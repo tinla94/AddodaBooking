@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { RentalList } from './rental-list';
 import RentalSearchInput from '../RentalSearchInput';
 import { connect } from 'react-redux';
@@ -13,6 +12,8 @@ class RentalListing extends React.Component {
   }
 
   render() {
+    const {rentals } = this.props;
+
     return (
       <section id="rentalListing">
         <div className="rentalListing-jumbotron">
@@ -47,9 +48,10 @@ class RentalListing extends React.Component {
           <h6>Start searching for your city...</h6>
           <RentalSearchInput />
           <hr />
+          <p className="rentalListing-length">Total {rentals.length} {rentals.length <= 1 ? 'place' : 'places'} available</p>
         </div>
         {/* Rental List */}
-        <RentalList rentals={this.props.rentals} />
+        <RentalList rentals={rentals} />
       </section>
     )
   }
