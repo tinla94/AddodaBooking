@@ -7,7 +7,7 @@ export function BookingCard(props) {
   const { booking } = props;
 
   return (
-    <div className="col-md-4">
+    <div className="col-md-12">
       <div className="card text-center">
         <div className="card-header">
           {booking.rental ? booking.rental.category : 'Deleted Rental'}
@@ -19,14 +19,19 @@ export function BookingCard(props) {
               <p className="card-text booking-desc">{booking.rental.description}</p>
             </div>
           }
-          <p className="card-text booking-days">{pretifyDate(booking.startAt)} - {pretifyDate(booking.endAt)} | {booking.days} days</p>
-          <p className="card-text booking-price"><span>Price: </span> <span className="booking-price-value">{booking.totalPrice} $</span></p>
+          <p className="card-text booking-days">Date: {pretifyDate(booking.startAt)} - {pretifyDate(booking.endAt)}</p>
+          <p className="card-text booking-days">Length: {booking.days} days</p>
+          <p className="card-text booking-price"><span>Total: </span> <span className="booking-price-value">{booking.totalPrice} $</span></p>
            { booking.rental &&
-              <Link className="button button-link button-dark-gray" to={`/rentals/${booking.rental._id}`}>Go to Rental</Link>
+              <Link 
+                className="btn btn-link" 
+                to={`/rentals/${booking.rental}`}>
+                Go to Rental
+              </Link>
            }
         </div>
         <div className="card-footer text-muted">
-          Created {pretifyDate(booking.createdAt)}
+          Booked on {pretifyDate(booking.createdAt)}
         </div>
       </div>
     </div>

@@ -1,13 +1,13 @@
 import React from 'react';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
+import moment from 'moment';
 import { toast } from 'react-toastify';
 import { BookingModal } from './BookingModal';
 import { getRangeOfDates } from 'helpers';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payment from '../payment/Payment';
-import { createBooking } from '../../actions/bookings-payments.action';
-import moment from 'moment';
+import { createBooking } from '../../actions/bookings.action';
 
 
 

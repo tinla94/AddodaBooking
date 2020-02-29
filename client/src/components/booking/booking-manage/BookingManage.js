@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PageLayout from '../../../utils/layout/Page-Layout';
 import { BookingCard, PaymentCard } from './BookingCard';
-import { fetchUserBookings } from '../../../actions/bookings-payments.action';
-import { getPendingPayments, acceptPayment, declinePayment } from '../../../actions/bookings-payments.action';
-
+import { getPendingPayments, acceptPayment, declinePayment, fetchUserBookings } from '../../../actions/bookings.action';
 
 
 class BookingManage extends React.Component {

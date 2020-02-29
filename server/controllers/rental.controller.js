@@ -13,7 +13,7 @@ const hotelImageUpload = singleImageUpload.single('rentalImage');
 // Check rental owner
 exports.checkRentalOwner = async (req, res) => {
     try {
-        const foundrental = await Rental.findById(req.params.id).populate('user');
+        const foundRental = await Rental.findById(req.params.id).populate('user');
 
         // check ids
         if (foundRental.user.id !== req.user.id) {
@@ -128,7 +128,7 @@ exports.deleteRental = async (req, res) => {
             });
 
         // check if user own the rental post
-        if (req.user._id !== foundRental.user.id) {
+        if (req.user.id !== foundRental.user.id) {
             return res.status(401).json({
                 errors: [{
                     title: 'Unauthorized Access',

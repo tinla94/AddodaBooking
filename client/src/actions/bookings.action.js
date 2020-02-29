@@ -33,7 +33,7 @@ export const fetchUserBookings = () => {
   return dispatch => {
     dispatch(fetchUserBookingsInit());
 
-    axiosInstance.get('/bookings/manage')
+    axiosInstance.get('/users/bookings-manage')
       .then(res => res.data)
       .then(userBookings => dispatch(fetchUserBookingsSuccess(userBookings)))
       .catch(({ response }) => dispatch(fetchUserBookingsFail(response.data.errors)))
@@ -42,7 +42,7 @@ export const fetchUserBookings = () => {
 
 // create bookings
 export const createBooking = (booking) => {
-  return axiosInstance.post('/bookings', booking)
+  return axiosInstance.post('/bookings/create', booking)
     .then(res => res.data)
     .catch(({ response }) => Promise.reject(response.data.errors))
 }

@@ -18,13 +18,13 @@ class Header2 extends React.Component {
 
     renderAuthButtons(isAuth) {
         if (isAuth) {
-            return <li>
-                <span
-                    className='nav-item nav-link clickable'
-                    onClick={this.handleLogout}>
-                    Sign Out
-        </span>
-            </li>
+            return (
+                <Nav.Link eventKey="5">
+                    <span onClick={this.handleLogout}>
+                        Sign Out
+                    </span>
+                </Nav.Link>
+            )
         }
 
         return (

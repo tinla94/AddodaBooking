@@ -25,19 +25,20 @@ exports.createBooking = async (req, res) => {
     const booking = new Booking({ startAt, endAt, totalPrice, guests, days });
 
     // find rental
-    const foundRental = Rental.findById(rental._id)
+    const foundRental = await Rental.findById(rental._id)
       .populate('bookings')
       .populate('user');
+    console.log(foundRental);
 
     // User cannot book their own post
-    if (foundRental.user.id === user._id) {
-      return res.status(405).json({ 
-          errors: [{
-            title: 'Action Denied',
-            detail: 'You cannot create booking on your Rental!'
-          }]
-      });
-    };
+    // if (foundRental.user.id === user.id) {
+    //   return res.status(405).json({ 
+    //       errors: [{
+    //         title: 'Action Denied',
+    //         detail: 'You cannot create booking on your Rental!'
+    //       }]
+    //   });
+    // };
 
     // validate booking and rental
     if (isValidBooking(booking, foundRental)) {
@@ -62,7 +63,10 @@ exports.createBooking = async (req, res) => {
           // save rental and
           // udpate user model
           foundRental.save();
-          await User.update({ _id: user.id }, { $push: { bookings: booking } }, function () { });
+          await User.update(
+            { _id: user.id }, 
+            { $push: { bookings: booking } }, 
+            function () { });
 
           // return booking
           return res.status(200).json(booking);
