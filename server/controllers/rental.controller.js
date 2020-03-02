@@ -195,7 +195,7 @@ exports.getAllRentals = async (req, res) => {
 // Get a rental info
 exports.getRental = async (req, res) => {
     try {
-        const foundRental = await Rental.findById(req.params.id);
+        const foundRental = await Rental.findById(req.params.id).populate('user');
 
         if (!foundRental) {
             return res.status(400).send({

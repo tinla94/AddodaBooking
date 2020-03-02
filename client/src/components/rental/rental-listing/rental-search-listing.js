@@ -1,6 +1,7 @@
 import React from 'react';
 import { RentalList } from './rental-list';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { toUpperCase } from 'helpers';
 import { getAllRentals } from '../../../actions/rentals.action';
@@ -41,10 +42,18 @@ class RentalSearchListing extends React.Component {
     }
 
     if (data.length > 0) {
-      title = `Your Home in City of ${toUpperCase(searchedCity)}`;
+      title = `Search for "${toUpperCase(searchedCity)}" city`;
     }
 
-    return <h1 className="page-title">{title}</h1>
+    return (
+      <div className="rental-search-listing">
+        <h1 className="rental-search-listing__title">{title}</h1>
+        <Link to="/rentals" className="button button-gray">
+          Go Back
+          </Link>
+        <hr />
+      </div>
+    )
   }
 
   render() {

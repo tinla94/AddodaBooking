@@ -6,7 +6,7 @@ export const RentalAssets = () => {
     <div className='rental-assets'>
       <h3 className='title'>Assets</h3>
       <div className='row rental-assets__detail'>
-        <div className='col-xs-6' style={{ marginRight: '2rem'}}>
+        <div className='col-xs-6'>
           <p>
             <i className='fas fa-parking'></i>
             <span>Private Parking</span>

@@ -6,13 +6,15 @@ export function RentalCard(props) {
 
   return (
     <div className={props.colNum}>
-      <Link className='rental-detail-link' to={`/rentals/${rental._id}`}>
+      <Link 
+        className='rental-detail-link' 
+        to={`/rentals/${rental._id}`}>
         <div className='card bwm-card'>
           <img className='card-img-top' src={rental.image} alt={rental.title}></img>
           <div className='card-block'>
-            <h6 className={`card-subtitle ${rental.category}`}>{rental.city}</h6>
-            <h4 className='card-title'>{rental.title}</h4>
-            <p className='card-text'>${rental.dailyRate}/night</p>
+            <h3 className='card-title'>{rental.title}</h3>
+            <h6 className={`card-subtitle`}>{rental.city} , {rental.country}</h6>
+            <h5 className='card-text'>${rental.dailyRate} / night</h5>
           </div>
         </div>
       </Link>

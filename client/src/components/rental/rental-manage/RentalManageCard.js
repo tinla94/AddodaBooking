@@ -40,27 +40,19 @@ export class RentalManageCard extends React.Component {
     const deleteClass = wantDelete ? 'toBeDeleted' : '';
 
     return (
-      <div className='col-md-4'>
+      <div className='col-md-6'>
         <div className={`card text-center ${deleteClass}`}>
           <div className='card-block'>
             <h2 className='card-title'>{rental.title}</h2>
-            <p style={{ color: 'gray' }}>---{toUpperCase(rental.city)}---</p>
-            <hr />
-            <Link
-              className='btn btn-link'
-              to={`/rentals/${rental._id}`}>Go to Rental</Link>
-            {rental.bookings && rental.bookings.length > 0 && modal}
-          </div>
-          <div className='card-footer text-muted'>
-            Created on {pretifyDate(rental.createdAt)}
-            <br />
-            At {pretifyTime(rental.createdAt)}
-            <br />
+            <p className='card-subtitle'>{rental.city} , {rental.country}</p>
             {!wantDelete &&
-              <React.Fragment>
+              <div className="card-links">
                 <Link
                   className='btn btn-link'
-                  to={{ pathname: `/rentals/${rental._id}/edit`, state: { isUpdate: true } }}
+                  to={`/rentals/${rental._id}`}>Link</Link>
+                <Link
+                  className='btn btn-link'
+                  to={{ pathname: `/rentals/rental/${rental._id}/edit`, state: { isUpdate: true } }}
                   style={{ color: 'orange' }}
                 > Edit </Link>
                 <button
@@ -68,8 +60,16 @@ export class RentalManageCard extends React.Component {
                   className='btn btn-link'
                   style={{ color: 'red', textDecoration: 'none' }}
                 > Delete </button>
-              </React.Fragment>
+              </div>
             }
+            <p style={{ color: 'gray' }}></p>
+            {rental.bookings && rental.bookings.length > 0 && modal}
+          </div>
+          <div className='card-footer text-muted'>
+            Created on {pretifyDate(rental.createdAt)}
+            <br />
+            At {pretifyTime(rental.createdAt)}
+            <br />
             {wantDelete &&
               <div className='delete-menu'>
                 Do you confirm?

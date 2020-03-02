@@ -11,32 +11,17 @@
     color: $dark-gray-color;
 
     .rental {
-      &-type {
-        font-size: 15px;
-        text-transform: uppercase;
-        font-weight: bold;
-        margin-bottom: 20px;
-
-        &__host {
-          text-transform: none;
-          color:  $dark-gray-color;
-        }
-      }
-
-      &-owner {
-        float: right;
+      &-user {
+        display: flex;
+        flex-direction: row;
+        align-items: center !important;
+        margin-bottom: 1.5rem;
 
         img {
-          height: 50px;
+          height: 40px;
+          margin-right: .5rem;
           border-radius: 50%;
-          display: block;
-          margin: 0 auto;
-        }
-
-        span {
-          display: block;
-          font-size: 13px;
-          font-weight: 300;
+          border: 3px solid $light-gray-color;
         }
       }
 
@@ -45,7 +30,7 @@
       }
 
       &-title {
-        margin-bottom: 5px;
+        margin-bottom: 1rem;
         font-size: 32px;
         font-weight: 700;
       }
@@ -98,6 +83,10 @@
         }
 
         &__detail {
+          display: flex;
+          justify-content: space-between;
+          padding: 0 1rem;
+
           p {
             margin-bottom: 15px;
             font-weight: 300;
