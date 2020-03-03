@@ -1,5 +1,7 @@
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 
 import { rentalReducer, selectedRentalReducer } from './rental-reducer';
 import { authReducer } from './auth-reducer';
@@ -19,7 +21,11 @@ export const init = () => {
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+  const store = createStore(
+    reducer, 
+    composeEnhancers(applyMiddleware(thunk)),
+    composeWithDevTools(applyMiddleware(thunk))
+  );
 
   return store;
 }
