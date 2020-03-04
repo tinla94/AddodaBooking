@@ -170,9 +170,9 @@ exports.getAllRentals = async (req, res) => {
     try {
         const rentals = await Rental
             .find()
-            .cache({
-                time: 10
-            });
+            // .cache({
+            //     time: 10
+            // });
 
         // return all rentals
         return res.status(200).json(rentals);
