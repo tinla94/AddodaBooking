@@ -62,6 +62,8 @@ app.options('*', cors());
 
 // Production build
 if (['production', 'ci'].includes(process.env.NODE_ENV)) {
+  app.use(cors({ origin: `${process.env.CLIENT_URL}`}));
+  
   app.use(express.static('client/build'));
 
   app.get('*', function (req, res) {
