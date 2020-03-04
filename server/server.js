@@ -1,16 +1,15 @@
+// read .env file
+require('dotenv').config();
 // import db
 require('./db/mongoose');
 // import cache
 require('./services/cache');
-// read .env file
-require('dotenv').config();
+
 
 // packages
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
-const flash = require('connect-flash');
 const path = require('path');
 const passport = require('passport');
 const { createError } = require('http-errors');
