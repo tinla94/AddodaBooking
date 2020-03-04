@@ -2,7 +2,6 @@ import React from 'react';
 import { MapWithGeocode} from '../../map/GoogleMap';
 import { connect } from 'react-redux';
 import { reloadMapFinish } from '../../../actions/rentals.action';
-import * as keys from '../../../config/keys';
 
 class RentalMap extends React.Component {
 
@@ -12,11 +11,10 @@ class RentalMap extends React.Component {
 
   render() {
     const { location, map: { isReloading } } = this.props;
-    console.log(location);
 
     return (
       <MapWithGeocode
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${keys.GOOGLE_MAP_API}&libraries=geometry,drawing,places`}
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_API}&libraries=geometry,drawing,places`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `250px` }} />}
         mapElement={<div style={{ height: `100%` }} />}

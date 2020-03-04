@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const normalizeErrors = require("../helpers/mongoose-error");
 const User = require('../models/user.model');
-const keys = require("../config/keys");
 
 
 
@@ -14,7 +13,9 @@ exports.signin = async (req, res) => {
 
     // check validation
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ 
+            errors: errors.array() 
+        });
     }
 
     try {
@@ -46,13 +47,12 @@ exports.signin = async (req, res) => {
         const payload = { user: { id: user.id } };
 
         // decode jwt code for token 
-        jwt.sign(payload, keys.SECRET, { expiresIn: 360000 }, (err, token) => {
+        jwt.sign(payload, process.env.SECRET, { expiresIn: 360000 }, (err, token) => {
             if (err) throw err;
 
             return res.status(200).json({ user, token });
         })
-    } catch (err) {
-        console.log(err.message)
+    } catch(err) {
         return res.status(500).send({
             errors: [{
                 title: 'Something wrong...',
@@ -69,7 +69,9 @@ exports.signup = async (req, res) => {
 
     // check validation
     if (!errors.isEmpty()) {
-        return res.status(400).json({ error: errors.array() });
+        return res.status(400).json({ 
+            error: errors.array() 
+        });
     }
 
     // check confirmation passwords

@@ -1,7 +1,6 @@
 const User = require("../models/user.model");
 const Rental = require("../models/rental.model");
 const Booking = require('../models/booking.model');
-const keys = require("../config/keys");
 const normalizeErrors = require('../helpers/mongoose-error');
 // import aws
 const { singleImageUpload } = require('../services/aws/image-upload');
@@ -28,7 +27,6 @@ exports.getUser = async (req, res) => {
     // return user
     return res.status(200).json(user);
   } catch (err) {
-    console.log(err.message)
     return res.status(500).send({
       errors: [{
         title: 'Something wrong...',
@@ -66,7 +64,6 @@ exports.updateUser = async (req, res) => {
       return res.status(200).json({ msg: 'Your information has been updated', user });
     });
   } catch (err) {
-    console.error(err.message);
     return res.status(500).send({
       errors: [{
         title: 'Something wrong...',
@@ -92,7 +89,6 @@ exports.deleteUser = async (req, res) => {
     // return message
     return res.status(200).json({ msg: 'Your account has been deleted' });
   } catch (err) {
-    console.error(err.message);
     return res.status(500).send({
       errors: [{
         title: 'Something wrong...',
@@ -110,7 +106,6 @@ exports.getUserBookings = async (req, res) => {
     // return bookings
     return res.status(200).json(foundBookings);
   } catch (err) {
-    console.error(err.message);
     return res.status(500).send({
       errors: [{
         title: 'Something wrong...',
@@ -128,7 +123,6 @@ exports.getUserRentals = async (req, res) => {
     // return rentals
     return res.status(200).json(foundRentals);
   } catch (err) {
-    console.error(err.message);
     return res.status(500).send({
       errors: [{
         title: 'Something wrong...',
@@ -160,7 +154,6 @@ exports.avatarUpload = (req, res) => {
       return res.status(200).json( user );
     });
   } catch (e) {
-    console.error(err.message);
     return res.status(500).send({
       errors: [{
         title: 'Something wrong...',

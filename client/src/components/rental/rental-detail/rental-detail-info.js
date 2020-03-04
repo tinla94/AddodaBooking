@@ -5,7 +5,6 @@ import { rentalType } from 'helpers';
 
 export function RentalDetailInfo(props) {
   const rental = props.rental;
-  console.log(rental);
 
   return (
     <div className='rental'>
@@ -16,7 +15,7 @@ export function RentalDetailInfo(props) {
       </h2>
       <hr />
       <div className="rental-user">
-          <img src={rental.user.avatar} />
+          <img src={rental.user.avatar} alt="user avatar"/>
           <p>{rental.user.firstname} {rental.user.lastname}</p>
       </div>
       <div className='rental-room-info'>

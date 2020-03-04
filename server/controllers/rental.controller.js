@@ -29,7 +29,6 @@ exports.checkRentalOwner = async (req, res) => {
         return res.status(200).json({ status: 'verified' });
     }
     catch (err) {
-        console.log(err.message)
         return res.status(500).send({
             errors: [{
                 title: 'Something wrong...',
@@ -61,7 +60,6 @@ exports.createRental = async (req, res) => {
         clearKey(Rental.collection.collectionName);
         res.status(201).json(rental);
     } catch (err) {
-        console.log(err.message)
         return res.status(500).send({
             errors: err
         });
@@ -105,7 +103,6 @@ exports.updateRental = async (req, res) => {
             return res.status(201).send(foundRental);
         });
     } catch (err) {
-        console.log(err.message)
         return res.status(500).send({
             errors: [{
                 title: 'Something wrong...',
@@ -158,7 +155,6 @@ exports.deleteRental = async (req, res) => {
             return res.status(200).json('Rental has been deleted');
         });
     } catch (err) {
-        console.log(err.message)
         return res.status(500).send({
             errors: [{
                 title: 'Something wrong...',
@@ -181,7 +177,6 @@ exports.getAllRentals = async (req, res) => {
         // return all rentals
         return res.status(200).json(rentals);
     } catch (err) {
-        console.log(err.message)
         return res.status(500).send({
             errors: [{
                 title: 'Something wrong...',
@@ -209,7 +204,6 @@ exports.getRental = async (req, res) => {
         // return rental
         return res.status(200).json(foundRental);
     } catch (err) {
-        console.log(err.message)
         return res.status(500).send({
             errors: [{
                 title: 'Something wrong...',
@@ -231,7 +225,6 @@ exports.rentalImageUpload = (req, res) => {
                 }]
             })
         }
-
         // add image
         return res.json({ 'rentalImageUrl': req.file.location });
     });

@@ -17,7 +17,6 @@ class RentalDetail extends React.Component {
   }
   render() {
     const { rental } = this.props;
-    console.log(rental);
 
     if (rental._id) {
       return (

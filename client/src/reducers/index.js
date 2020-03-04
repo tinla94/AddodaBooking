@@ -1,6 +1,5 @@
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 import { rentalReducer, selectedRentalReducer } from './rental-reducer';
@@ -24,7 +23,6 @@ export const init = () => {
   const store = createStore(
     reducer, 
     composeEnhancers(applyMiddleware(thunk)),
-    composeWithDevTools(applyMiddleware(thunk))
   );
 
   return store;

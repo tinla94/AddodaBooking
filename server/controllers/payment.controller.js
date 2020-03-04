@@ -1,5 +1,4 @@
-const keys = require('../config/keys');
-const stripe = require('stripe')(keys.STRIPE_SK);
+const stripe = require('stripe')(process.env.STRIPE_SK);
 const normalizeErrors = require('../helpers/mongoose-error');
 const Payment = require('../models/payment.model');
 const Booking = require('../models/booking.model');

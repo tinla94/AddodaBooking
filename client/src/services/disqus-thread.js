@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import keys from '../config/keys';
 
-const SHORTNAME = keys.DISQUS_SHORTNAME;
+
+const SHORTNAME = process.env.DISQUS_SHORTNAME;
 const WEBSITE_URL = process.env.NODE_ENV !== 'Production' ? 'http://localhost:3000' : '';
 
 function renderDisqus() {
