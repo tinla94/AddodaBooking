@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node --exec babel-node ./bin/www",
-    "server": "nodemon --exec babel-node ./bin/www --ignore ../client/"
+    "start": "node ./bin/www",
+    "server": "nodemon ./bin/www"
   },
   "author": "",
   "license": "ISC",
