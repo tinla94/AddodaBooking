@@ -2,6 +2,9 @@
 require('./db/mongoose');
 // import cache
 require('./services/cache');
+// read .env file
+require('dotenv').config();
+
 // packages
 const express = require('express');
 const mongoose = require('mongoose');
