@@ -47,7 +47,6 @@ export class ProfileAvatarUpload extends Component {
 
     render() {
         const { message, showModal, file } = this.state;
-        console.log(file);
 
         return (
             <React.Fragment>
@@ -60,7 +59,7 @@ export class ProfileAvatarUpload extends Component {
                         style={{ margin: '0 auto', textAlign: 'center' }}
                     >
                             <span           className="button button-gray">
-                                <i class="fas fa-file-image"></i>
+                                <i className="fas fa-file-image"></i>
                             </span>
                             <p style={{ marginTop: '10px', fontSize: '10px'}}>Select your image*</p>
                         <input

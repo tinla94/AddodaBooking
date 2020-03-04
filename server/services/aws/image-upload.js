@@ -10,6 +10,8 @@ const s3 = new aws.S3({
   region: 'us-west-1'
 });
 
+console.log(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY)
+
 const checkFileType = (req, file, cb) => {
   if (file.mimetype === 'image/jpeg/jpg/png/gif' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
     cb(null, true);

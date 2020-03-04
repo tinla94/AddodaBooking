@@ -54,7 +54,6 @@ class UserProfile extends React.Component {
 
     render() {
         const { user } = this.state;
-        console.log(user);
 
         return (
             <CenterLayout>
@@ -63,6 +62,7 @@ class UserProfile extends React.Component {
                         {this.renderUserAvatar()}
                         <hr />
                         <h1>{user.firstname} {user.lastname}</h1>
+                        <p style={{ fontSize: '12px'}}>({user.email})</p>
                         <p>From {user.country ? user.country : 'United State'}</p>
                         <h5>Joined on {moment(user.joined).format('MMMM Do YYYY')}</h5>
 
