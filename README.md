@@ -2,9 +2,9 @@
 
 ![Screenshot of Homepage](https://i.imgur.com/nil421f.png)
 
-**Demo**: https://adodda-booking.herokuapp.com/
+**Demo**: https://overnightbooking.online
 
-AdoddaBooking is a friendly hotel booking web-application for everyone to share their place for rent or rent out a place from people around the world. 
+Overnightbooking is a friendly hotel/room/condo/house booking web-application for everyone to share their place for rent or rent out a place from people around the world. 
 
 # Fullstack Application
 
@@ -16,11 +16,7 @@ I built a Full-stack Application, using MERN Stack (MongoDB, Express, React, Nod
 
 2. **Express.js**: a Node.js framework. You can create the server and server-side code for an application like most of the other web languages but using JavaScript.
 
-3. **MongoDB**: a cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schema. 
-
-4. **Redis**: an open-source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, and geospatial indexes with radius queries.
-
-5. **PM2**: a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
+3. **PM2**: a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
 
 ## Front-End
@@ -34,11 +30,19 @@ I built a Full-stack Application, using MERN Stack (MongoDB, Express, React, Nod
 7. **React-Reveal**: a high performance animation library for React.
 
 
-## Other Technologies
+## Database
 
-8. **AWS S3**: a service offered by Amazon Web Services that provides object storage through a web service interface.
+8. **MongoDB**: a cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schema. 
 
-9. **Google Map API**: a robust tool that can be used to create a custom map, a searchable map, check-in functions, display live data synching with location, plan routes, or create a mashup just to name a few.
+9. **Redis**: an open-source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, and geospatial indexes with radius queries.
+
+## APIs
+
+10. **AWS S3**: a service offered by Amazon Web Services that provides object storage through a web service interface.
+
+11. **Google Map API**: a robust tool that can be used to create a custom map, a searchable map, check-in functions, display live data synching with location, plan routes, or create a mashup just to name a few.
+
+12. **Disqus**: an add-on tools for site owners to power discussions, increase engagement, and earn revenue.
 
 
 # Getting Started
@@ -86,55 +90,27 @@ mongod
 Please look at `package.json` file for all dependencies that you will need to install.  For example you will need *parcel-bundler* which can be installed via npm.
 
 
-# Heroku and Deployment
+# Deployment
 
-1. Login your heroku
+1. **Digital Ocean**: provides developers cloud services that help to deploy and scale applications that run simultaneously on multiple computers.
 
-```
-heroku login
-```
+2. **namecheap**:  an ICANN-accredited domain registrar and technology company.
 
-2. Create Heroku 
+3. **Cloudflare**: a web-infrastructure and website-security company, providing content-delivery-network services, DDoS mitigation, Internet security, and distributed domain-name-server services
 
-```
-heroku create <github.name><project-name>
-```
 
-3. Cofirm heroku
+## Deploy Web Application to Digital Ocean
+https://medium.com/@chris.geelhoed/how-to-deploy-node-js-shopify-apps-to-digital-ocean-4b2350840080
 
- ``` 
- heroku remote -v
- ```
- 
- 4. Add files ( same steps as adding to github)
- 
- ```
- git add .
- ```
- 
- 5. Commit all files
- 
- ``` 
- git commit -m **"description"**
- ```
- 
- 6. Update new files to heroku
- 
- ```
- git push heroku master
- ```
- 
- ### WARNING
- 
- Before making your heroku link works, you should add below _command_ to **package.json** on _backend_ side
- 
- ```
- "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-```
+https://medium.com/@nikitakolmogorov/how-to-deploy-node-js-app-to-digital-ocean-droplet-with-free-continuous-integration-4a6cb73a6903
 
-1. **NPM_CONFIG_PRODUCTION=false** to skip prunning step, so you can access packages declared under _devDependencies_.
-2. _npm install --prefix client_ will install **client** side to merge with **server** side.
-3. _npm run build --prefix client_ build a _build_ folder to make **client** available for **production**.
+## Install Node.js Ubuntu
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04
+
+## Setup Redis on Ubuntu 18.04
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04
+
+
 
 
 ## Author
