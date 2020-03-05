@@ -1,6 +1,6 @@
 # OvernightBooking
 
-![Screenshot of Homepage](https://imgur.com/FIHv8ub)
+![Screenshot of Homepage](https://i.imgur.com/FIHv8ub.png)
 
 **Demo**: https://overnightbooking.online
 
