@@ -15,8 +15,7 @@ export function RentalDetailInfo(props) {
       </h2>
       <hr />
       <div className="rental-user">
-          <img src={rental.user.avatar} alt="user avatar"/>
-          <p>{rental.user.firstname} {rental.user.lastname}</p>
+          <p>Hosted By <span style={{ fontWeight: 'bold' }}>{rental.user.firstname} {rental.user.lastname}</span></p>
       </div>
       <div className='rental-room-info'>
         <span><i className='fa fa-building'></i>{rental.bedrooms} bedrooms</span>

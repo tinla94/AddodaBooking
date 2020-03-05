@@ -49,7 +49,11 @@ class RentalDetail extends React.Component {
             </div>
           </div>
           <hr />
-          <DisqusThread />
+          <DisqusThread 
+            id={rental._id}
+            title={rental.title}
+            path={`/rentals/${rental.id}`}
+          />
         </section>
       )
     } else {

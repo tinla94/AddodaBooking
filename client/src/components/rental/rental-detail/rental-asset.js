@@ -16,7 +16,7 @@ export const RentalAssets = () => {
             <span>Wifi</span>
           </p>
           <p>
-            <i class="fas fa-kaaba"></i>          
+            <i className="fas fa-kaaba"></i>          
             <span>Washer</span>
           </p>
           <p>
@@ -30,7 +30,7 @@ export const RentalAssets = () => {
             <span>Television</span>
           </p>
           <p>
-            <i class="fas fa-utensils"></i>
+            <i className="fas fa-utensils"></i>
             <span>Kitchen</span>
           </p>
           <p>
