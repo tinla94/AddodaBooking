@@ -16,7 +16,6 @@ if (process.env.NODE_ENV === 'production') {
 // setup redis client
 const client = redis.createClient({
     port: redisPort,
-    password: process.env.REDIS_URL_PASSWORD,
     retry_strategy: () => 1000
 });
 client.hget = promisify(client.hget);
