@@ -18,6 +18,7 @@ const client = redis.createClient({
     port: redisPort,
     retry_strategy: () => 1000
 });
+console.log(client.address);
 client.hget = promisify(client.hget);
 const exec = mongoose.Query.prototype.exec;
 
