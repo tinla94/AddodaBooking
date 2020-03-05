@@ -2,9 +2,20 @@ const mongoose = require('mongoose');
 const redis = require('redis');
 const { promisify } = require('util');
 
+
+// Redis Port
+let redisPort;
+
+// Check production
+if (process.env.NODE_ENV === 'production') {
+  redisPort = process.env.REDIS_URL 
+} else {
+  redisPort = 'redis://127.0.0.1:6379'
+}
+
 // setup redis client
 const client = redis.createClient({
-    port: process.env.REDIS_URL,
+    port: redisPort,
     password: process.env.REDIS_URL_PASSWORD,
     retry_strategy: () => 1000
 });
